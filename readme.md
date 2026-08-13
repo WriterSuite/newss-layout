@@ -1,4 +1,4 @@
-Here is the updated step-by-step guide including the final custom domain setup.
+Here is the updated step-by-step guide with **`npm run build`** included in the correct sequence (right after installing packages, so the website files can be compiled before deploying).
 
 ---
 
@@ -94,13 +94,25 @@ In the terminal window you opened in **Step 3**, type the following command and 
 npm i
 ```
 
-* **What to expect:** You will see a lot of text scrolling down the screen. This is normal! It means Node.js is downloading all the necessary tools for your project. Wait a minute or two until it finishes and stops moving.
+* **What to expect:** You will see text scrolling down the screen. This is normal! It means Node.js is downloading all the necessary tools for your project. Wait a minute or two until it stops.
 
 ---
 
-## Step 6: Deploy Your Website
+## Step 6: Build Your Website
 
-In the same terminal window, type the following command and press **Enter**:
+Next, compile your website code into production-ready files. In the same terminal window, type the following command and press **Enter**:
+
+```bash
+npm run build
+```
+
+* **What to expect:** This process will take a few seconds and will create the `./dist` folder containing the compiled files ready for Cloudflare.
+
+---
+
+## Step 7: Deploy Your Website
+
+Now, upload your site to Cloudflare. In the same terminal window, type:
 
 ```bash
 npx wrangler deploy
@@ -114,7 +126,7 @@ npx wrangler deploy
 
 ---
 
-## Step 7: Attach Your Custom Domain
+## Step 8: Attach Your Custom Domain
 
 Now that your site is deployed, you can connect your own domain name (e.g., `yourwebsite.com`) to it.
 
@@ -125,4 +137,4 @@ Now that your site is deployed, you can connect your own domain name (e.g., `you
 5. Click the blue **Add domain** button.
 6. Choose or type the domain name you want to connect to your site, then click **Add domain** to save.
 
-🎉 **Congratulations!** Your website is now fully set up and connected to your custom domain.
+🎉 **Congratulations!** Your website is now fully set up and live on your custom domain.
