@@ -1,4 +1,4 @@
-Here is a step-by-step guide designed for beginners with no coding experience.
+Here is the updated step-by-step guide including the final custom domain setup.
 
 ---
 
@@ -110,4 +110,19 @@ npx wrangler deploy
   1. If this is your first time using Cloudflare on your computer, your browser will automatically open a Cloudflare login page.
   2. Click **Allow / Authorize** to connect your computer to your Cloudflare account.
   3. Once authorized, return to the terminal window. The deployment process will complete.
-  4. At the end, you will see a link (URL) where your website is now live! 🎉
+  4. At the end, you will see a temporary URL where your website is published.
+
+---
+
+## Step 7: Attach Your Custom Domain
+
+Now that your site is deployed, you can connect your own domain name (e.g., `yourwebsite.com`) to it.
+
+1. Open your browser and log in to the **[Cloudflare Dashboard](https://dash.cloudflare.com/)**.
+2. In the left sidebar menu, click on **Build** > **Compute** > **Workers & Pages**.
+3. Locate and click on your newly deployed website from the list (it will be named **news** or whatever name was set in your file).
+4. Select the **Domains** tab.
+5. Click the blue **Add domain** button.
+6. Choose or type the domain name you want to connect to your site, then click **Add domain** to save.
+
+🎉 **Congratulations!** Your website is now fully set up and connected to your custom domain.
