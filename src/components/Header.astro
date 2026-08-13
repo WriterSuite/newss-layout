@@ -1,0 +1,107 @@
+---
+import { getCategories, getSiteConfig } from '../lib/api';
+
+const categories = await getCategories();
+const siteConfig = await getSiteConfig();
+
+export interface Props {
+  currentCategorySlug?: string;
+  subTitle?: string;
+}
+
+const { currentCategorySlug = 'all', subTitle } = Astro.props;
+---
+
+<header class="border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 sticky top-0 z-40 shadow-sm">
+    <!-- TOP UTILITY BAR & BREAKING TICKER -->
+    <div class="bg-zinc-900 text-zinc-200 text-xs py-1.5 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-4 text-zinc-400">
+                <span id="current-date" class="font-medium text-zinc-300">Sunday, August 9, 2026</span>
+                <span class="hidden sm:inline">•</span>
+                <span class="hidden sm:flex items-center gap-1.5 text-zinc-300">
+                    <i class="fa-solid font-sm fa-cloud-sun text-amber-400"></i> Geneva, 68°F
+                </span>
+                <span class="hidden md:inline">•</span>
+                <span class="hidden md:inline text-emerald-400 font-mono"><i class="fa-solid fa-arrow-trend-up mr-1"></i>S&P 500 +0.84%</span>
+            </div>
+            
+            <!-- Breaking News Ticker -->
+            <div class="flex items-center overflow-hidden w-full md:w-1/2 news-ticker-wrap">
+                <span class="bg-editorial-red text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-sm mr-2 shrink-0">Breaking</span>
+                <div class="overflow-hidden whitespace-nowrap w-full">
+                    <div class="animate-marquee text-zinc-300">
+                        <span class="mr-8"><a href="/article/historic-summit-yields-accord-on-ai-safeguards" class="hover:underline">Global Climate Accord signed by 140 nations in Geneva</a></span>
+                        <span class="mr-8"><a href="/article/global-semiconductor-shares-surge-breakthrough-microchip-node" class="hover:underline">Tech Giant unveils sub-nanometer microchip architecture</a></span>
+                        <span class="mr-8"><a href="/article/orbital-observatory-detects-atmospheric-water-vapor-exoplanet" class="hover:underline">Orbital observatory detects atmospheric biosignatures on exoplanet</a></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hidden lg:flex items-center gap-3">
+                <button id="theme-toggle" onclick="toggleDarkMode()" class="text-zinc-400 hover:text-white transition-colors" title="Toggle Dark/Light Mode" aria-label="Toggle Dark Mode">
+                    <i class="fa-solid fa-moon text-sm" id="theme-toggle-icon"></i>
+                </button>
+                <a href="#newsletter" class="text-xs text-brand-400 font-semibold hover:text-brand-300">Subscribe</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN EDITORIAL MASTHEAD -->
+    <div class="max-w-7xl mx-auto px-4 py-4 sm:py-6">
+        <div class="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-4 sm:pb-6">
+            <!-- Left Menu & Search Toggle -->
+            <div class="flex items-center gap-4">
+                <button onclick="toggleMobileMenu()" class="p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300" aria-label="Open Navigation Menu">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                <button onclick="toggleSearchModal()" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-500 text-xs hover:bg-zinc-200 dark:hover:bg-zinc-700 transition">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span>Search news, topics...</span>
+                    <kbd class="ml-2 font-mono text-[10px] bg-white dark:bg-zinc-900 px-1.5 py-0.5 rounded shadow-xs">⌘K</kbd>
+                </button>
+            </div>
+
+            <!-- Brand Logo -->
+            <div class="text-center">
+                <a href="/" class="inline-block">
+                    <h1 class="font-serif text-2xl sm:text-4xl lg:text-6xl font-black tracking-tight text-zinc-950 dark:text-white uppercase">
+                        {siteConfig.site_title || "The Global Chronicle"}
+                    </h1>
+                </a>
+                <p class="text-[10px] sm:text-xs text-zinc-500 tracking-widest uppercase mt-0.5 font-sans font-medium">
+                    {subTitle || siteConfig.site_tagline || "International Edition • Truth in Reporting • Est. 1898"}
+                </p>
+            </div>
+
+            <!-- Right Utility Buttons -->
+            <div class="flex items-center gap-3">
+                <button onclick="toggleBookmarksDrawer()" class="relative p-2 text-zinc-700 dark:text-zinc-300 hover:text-brand-600 dark:hover:text-brand-500" aria-label="View Saved Bookmarks">
+                    <i class="fa-regular fa-bookmark text-xl"></i>
+                    <span id="bookmark-badge" class="hidden absolute top-0 right-0 w-2.5 h-2.5 bg-editorial-red rounded-full"></span>
+                </button>
+                <a href="/#newsletter" class="hidden sm:block px-4 py-2 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-xs font-bold uppercase tracking-wider rounded hover:bg-brand-600 dark:hover:bg-brand-500 transition shadow-sm">
+                    Get e-Paper
+                </a>
+            </div>
+        </div>
+
+        <!-- CATEGORY NAVIGATION -->
+        <nav class="flex items-center justify-between overflow-x-auto py-2.5 no-scrollbar border-b border-zinc-100 dark:border-zinc-800/60 text-xs font-bold uppercase tracking-wider">
+            <div class="flex items-center space-x-6 shrink-0">
+                <a href="/" class={`category-nav-item transition pb-1 ${currentCategorySlug === 'all' ? 'text-brand-600 dark:text-brand-400 border-b-2 border-brand-600 dark:border-brand-400 font-bold' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white'}`}>
+                    Top Stories
+                </a>
+                {categories.map((cat) => (
+                    <a href={`/category/${cat.slug}`} class={`category-nav-item transition pb-1 ${currentCategorySlug === cat.slug ? 'text-brand-600 dark:text-brand-400 border-b-2 border-brand-600 dark:border-brand-400 font-bold' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white'}`}>
+                        {cat.name || cat.category_name}
+                    </a>
+                ))}
+            </div>
+            <div class="hidden lg:flex items-center gap-2 text-zinc-500 shrink-0">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-[11px] font-semibold text-zinc-600 dark:text-zinc-400">Live Newsroom</span>
+            </div>
+        </nav>
+    </div>
+</header>

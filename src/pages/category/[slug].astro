@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import OpinionCard from '../../components/OpinionCard.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import { getCategoryPosts, getCategories } from '../../lib/api';
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+const categorySlug = slug || 'world';
+
+const { category, items: posts } = await getCategoryPosts(categorySlug, 1, 12);
+const categories = await getCategories();
+
+const categoryName = category?.name || category?.category_name || categorySlug.toUpperCase();
+const heroPost = posts[0] || {
+  id: "hero-big-post",
+  title: `Latest Developments in ${categoryName}`,
+  subheading: `Comprehensive coverage and field dispatches from our global correspondents monitoring ${categoryName}.`,
+  slug: "historic-summit-yields-accord-on-ai-safeguards",
+  thumbnail_url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop",
+  publish_date: "2026-08-09T10:00:00.000Z",
+  category: { name: categoryName, slug: categorySlug },
+  author: { name: "Sarah Jenkins", tagline: "Desk Editor-in-Chief" },
+  readTime: "6 min read"
+};
+
+const subPosts = posts.slice(1);
+---
+
+<BaseLayout 
+  title={`${categoryName} News & Analysis - The Global Chronicle`}
+  description={`Comprehensive reporting, intelligence dispatches, and expert analysis on ${categoryName}.`}
+  currentCategorySlug={categorySlug}
+  subTitle={`${categoryName} Desk • Est. 1898`}
+>
+  <!-- CATEGORY HERO MASTHEAD -->
+  <section class="bg-gradient-to-r from-zinc-900 via-zinc-950 to-brand-950 text-white rounded-2xl p-6 sm:p-10 shadow-2xl relative overflow-hidden border border-zinc-800">
+      <div class="absolute -right-16 -top-16 w-64 h-64 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
+          <div class="space-y-3 max-w-2xl">
+              <div class="flex items-center gap-3">
+                  <span class="bg-editorial-red text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded">
+                      Primary Desk
+                  </span>
+                  <span class="text-xs text-brand-300 font-mono"><i class="fa-solid fa-globe mr-1"></i> Global Coverage</span>
+              </div>
+
+              <h1 class="font-serif text-3xl sm:text-5xl font-extrabold tracking-tight">
+                  {categoryName}
+              </h1>
+
+              <p class="text-zinc-300 text-sm sm:text-base leading-relaxed">
+                  In-depth reporting, intelligence dispatches, diplomatic analysis, and strategy from our international bureaus.
+              </p>
+          </div>
+
+          <!-- Desk Chief Spotlight Card -->
+          <div class="bg-zinc-800/80 backdrop-blur-md p-4 sm:p-5 rounded-xl border border-zinc-700/60 flex items-center gap-4 shrink-0 max-w-md">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150&auto=format&fit=crop" alt="Desk Chief" class="w-14 h-14 rounded-full object-cover ring-2 ring-brand-400">
+              <div>
+                  <span class="text-[10px] font-bold uppercase text-brand-400 tracking-wider">Desk Editor-in-Chief</span>
+                  <h4 class="font-serif font-bold text-sm text-white">Sarah Jenkins</h4>
+                  <p class="text-xs text-zinc-400 mt-0.5">Directing international correspondents across 5 continents.</p>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- CATEGORY FEATURED HIGHLIGHT -->
+  <section class="space-y-6">
+      <div class="flex items-center justify-between border-b-2 border-zinc-900 dark:border-zinc-100 pb-2">
+          <h2 class="font-serif text-2xl font-bold tracking-tight text-zinc-950 dark:text-white flex items-center gap-2">
+              <span class="w-3 h-3 bg-brand-600 inline-block"></span> Category Lead Stories
+          </h2>
+          <span class="text-xs text-zinc-500 font-mono">Curated Dispatches</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div class="lg:col-span-8">
+              <ArticleCard article={heroPost} variant="hero-big" />
+          </div>
+
+          <div class="lg:col-span-4 space-y-4">
+              <div class="flex items-center justify-between pb-2 border-b border-zinc-200 dark:border-zinc-800">
+                  <h3 class="font-serif font-bold text-lg text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+                      <i class="fa-solid fa-bolt text-amber-500"></i> Category Feed
+                  </h3>
+              </div>
+              <div class="space-y-4 divide-y divide-zinc-100 dark:divide-zinc-800">
+                  {subPosts.slice(0, 4).map((post, idx) => (
+                      <ArticleCard article={post} variant="side-list" indexNumber={idx + 1} />
+                  ))}
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- CATEGORY GRID -->
+  <section class="border-t border-zinc-200 dark:border-zinc-800 pt-10">
+      <div class="flex items-center justify-between mb-6">
+          <h2 class="font-serif text-2xl font-bold tracking-tight">All {categoryName} Articles</h2>
+          <span class="text-xs text-zinc-500 font-mono">{posts.length} Stories Available</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {posts.map((post) => (
+              <ArticleCard article={post} variant="standard" />
+          ))}
+      </div>
+  </section>
+
+  <!-- NEWSLETTER SUBSCRIPTION -->
+  <Newsletter title={`Subscribe to ${categoryName} Updates`} description="Get top dispatches from this desk delivered straight to your inbox every morning." />
+</BaseLayout>

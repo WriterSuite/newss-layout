@@ -1,0 +1,65 @@
+---
+import { getSiteConfig, getCategories, getPages } from '../lib/api';
+
+const siteConfig = await getSiteConfig();
+const categories = await getCategories();
+const pages = await getPages();
+---
+
+<footer class="bg-zinc-950 text-zinc-400 border-t border-zinc-800 mt-16 text-xs">
+    <div class="max-w-7xl mx-auto px-4 py-12">
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
+            <div class="col-span-2">
+                <h3 class="font-serif text-2xl font-bold text-white uppercase tracking-tight">
+                    {siteConfig.site_title || "The Global Chronicle"}
+                </h3>
+                <p class="mt-3 text-zinc-400 leading-relaxed max-w-sm">
+                    {siteConfig.site_description || "Delivering unbiased, rigorous journalism across international relations, technological shifts, and economic developments since 1898."}
+                </p>
+                <div class="flex gap-4 mt-6 text-zinc-300">
+                    <a href="#" class="hover:text-white text-base" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" class="hover:text-white text-base" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" class="hover:text-white text-base" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="hover:text-white text-base" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-white uppercase tracking-wider mb-3 text-[11px]">News Desks</h4>
+                <ul class="space-y-2 font-medium">
+                    {categories.map((cat) => (
+                        <li><a href={`/category/${cat.slug}`} class="hover:underline hover:text-white transition">{cat.name || cat.category_name}</a></li>
+                    ))}
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-white uppercase tracking-wider mb-3 text-[11px]">Opinion & Arts</h4>
+                <ul class="space-y-2 font-medium">
+                    <li><a href="/category/opinion" class="hover:underline hover:text-white transition">Editorial Board</a></li>
+                    <li><a href="/category/opinion" class="hover:underline hover:text-white transition">Columnists</a></li>
+                    <li><a href="/category/culture" class="hover:underline hover:text-white transition">Cultural Reviews</a></li>
+                    <li><a href="/category/culture" class="hover:underline hover:text-white transition">Books & Ideas</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-white uppercase tracking-wider mb-3 text-[11px]">Company & Pages</h4>
+                <ul class="space-y-2 font-medium">
+                    {pages.map((p) => (
+                        <li><a href={`/pages/${p.slug}`} class="hover:underline hover:text-white transition">{p.title}</a></li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+
+        <div class="pt-8 border-t border-zinc-900 flex flex-col sm:flex-row justify-between items-center gap-4 text-zinc-500">
+            <p>&copy; 2026 {siteConfig.site_title || "The Global Chronicle"}. All rights reserved.</p>
+            <div class="flex gap-6">
+                {pages.slice(0, 3).map((p) => (
+                    <a href={`/pages/${p.slug}`} class="hover:underline">{p.title}</a>
+                ))}
+            </div>
+        </div>
+    </div>
+</footer>

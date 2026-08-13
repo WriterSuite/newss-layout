@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPageBySlug } from '../../lib/api';
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+const page = await getPageBySlug(slug || 'about-us');
+
+const title = page?.title || 'Custom Page';
+const content = page?.content || '<p>Page content coming soon.</p>';
+---
+
+<BaseLayout title={`${title} - The Global Chronicle`} description={page?.meta_description || title}>
+  <div class="max-w-4xl mx-auto py-8 space-y-6">
+    <h1 class="font-serif text-4xl sm:text-5xl font-bold text-zinc-950 dark:text-white">{title}</h1>
+    <div class="prose dark:prose-invert max-w-none text-zinc-800 dark:text-zinc-200 text-lg leading-relaxed" set:html={content} />
+  </div>
+</BaseLayout>

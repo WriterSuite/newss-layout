@@ -1,0 +1,346 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SearchModal from '../components/SearchModal.astro';
+import BookmarksDrawer from '../components/BookmarksDrawer.astro';
+import { getSiteConfig, getAdsConfig } from '../lib/api';
+import '../styles/global.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  currentCategorySlug?: string;
+  subTitle?: string;
+  schemaMarkup?: Record<string, any>;
+}
+
+const siteConfig = await getSiteConfig();
+const adsConfig = await getAdsConfig();
+const { 
+  title = `${siteConfig.site_title || "The Global Chronicle"} - Modern News Portal`,
+  description = siteConfig.site_description || "International News Edition • Truth in Reporting • Est. 1898",
+  currentCategorySlug = 'all',
+  subTitle,
+  schemaMarkup
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Global Header Injection Code (Analytics, GTM, AdSense Head Scripts) -->
+    {(adsConfig?.header || adsConfig?.header_injection_code) && (
+      <Fragment set:html={adsConfig.header || adsConfig.header_injection_code} />
+    )}
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,400;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    {schemaMarkup && (
+      <script type="application/ld+json" set:html={JSON.stringify(schemaMarkup)} />
+    )}
+
+    <script is:inline>
+      // Initialize Theme from Local Storage or Preference
+      if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+      } else {
+          document.documentElement.classList.remove('dark');
+      }
+    </script>
+</head>
+<body class="bg-editorial-lightBg dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 font-sans antialiased transition-colors duration-200 min-h-screen flex flex-col justify-between">
+
+    <!-- Header Component -->
+    <Header currentCategorySlug={currentCategorySlug} subTitle={subTitle} />
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-8 space-y-12 w-full flex-1">
+        <slot />
+    </main>
+
+    <!-- Global Footer Ad Injection Placement -->
+    {(adsConfig?.footer || adsConfig?.footer_ad_code) && (
+      <div class="w-full text-center max-w-7xl mx-auto px-4 my-6">
+        <Fragment set:html={adsConfig.footer || adsConfig.footer_ad_code} />
+      </div>
+    )}
+
+    <!-- Footer Component -->
+    <Footer />
+
+    <!-- Search Modal Component -->
+    <SearchModal />
+
+    <!-- Bookmarks Drawer Component -->
+    <BookmarksDrawer />
+
+    <!-- ARTICLE READING MODAL (Interactive Pop-up Reader) -->
+    <div id="article-modal" class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-sm flex justify-center items-end sm:items-center p-0 sm:p-4 transition-opacity">
+        <div class="bg-white dark:bg-zinc-900 w-full max-w-3xl max-h-[90vh] rounded-t-2xl sm:rounded-2xl overflow-y-auto shadow-2xl border border-zinc-200 dark:border-zinc-800 flex flex-col">
+            <!-- Modal Header -->
+            <div class="sticky top-0 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 p-4 flex justify-between items-center z-10">
+                <span id="modal-category" class="text-xs font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">Article Reader</span>
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleBookmarkCurrentArticle()" class="text-zinc-500 hover:text-brand-500 text-sm" aria-label="Bookmark Article">
+                        <i id="modal-bookmark-icon" class="fa-regular fa-bookmark"></i>
+                    </button>
+                    <button onclick="closeArticleModal()" class="w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-500 flex items-center justify-center hover:bg-zinc-200 dark:hover:bg-zinc-700" aria-label="Close Modal">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="p-6 sm:p-8 space-y-6">
+                <h2 id="modal-title" class="font-serif text-2xl sm:text-4xl font-bold leading-tight text-zinc-900 dark:text-white">
+                    Article Title Loading...
+                </h2>
+
+                <div class="flex items-center gap-4 text-xs text-zinc-500 border-b border-zinc-100 dark:border-zinc-800 pb-4">
+                    <span id="modal-author" class="font-semibold text-zinc-700 dark:text-zinc-300">Chronicle Staff Reporter</span>
+                    <span>•</span>
+                    <span id="modal-time">Published Today</span>
+                </div>
+
+                <div class="aspect-video rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-800">
+                    <img id="modal-image" src="" alt="Article feature image" class="w-full h-full object-cover">
+                </div>
+
+                <div id="modal-body" class="prose dark:prose-invert max-w-none text-zinc-700 dark:text-zinc-300 text-base leading-relaxed space-y-4">
+                    <p>Loading article content...</p>
+                </div>
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="p-4 bg-zinc-50 dark:bg-zinc-950 border-t border-zinc-200 dark:border-zinc-800 text-center">
+                <button onclick="closeArticleModal()" class="px-6 py-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-xs font-bold rounded-lg uppercase tracking-wider">
+                    Close Article
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION DRAWER BACKDROP & MENU -->
+    <div id="menu-backdrop" onclick="toggleMobileMenu()" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden transition-opacity duration-300"></div>
+
+    <aside id="mobile-menu" class="fixed top-0 left-0 bottom-0 z-50 w-80 sm:w-96 bg-white dark:bg-zinc-900 border-r border-zinc-200 dark:border-zinc-800 shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out flex flex-col overflow-y-auto">
+        <!-- Menu Header -->
+        <div class="p-6 border-b border-zinc-200 dark:border-zinc-800 flex justify-between items-center bg-zinc-50 dark:bg-zinc-950">
+            <div>
+                <h3 class="font-serif text-xl font-bold uppercase text-zinc-950 dark:text-white tracking-tight">The Global Chronicle</h3>
+                <p class="text-[10px] text-zinc-500 uppercase tracking-widest font-sans mt-0.5">Navigation Hub</p>
+            </div>
+            <button onclick="toggleMobileMenu()" class="w-9 h-9 rounded-full bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 flex items-center justify-center hover:bg-zinc-300 dark:hover:bg-zinc-700 transition" aria-label="Close Menu">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+
+        <!-- Menu Quick Search -->
+        <div class="p-4 border-b border-zinc-100 dark:border-zinc-800/60 bg-white dark:bg-zinc-900">
+            <button onclick="toggleMobileMenu(); toggleSearchModal();" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-500 text-xs hover:bg-zinc-200 dark:hover:bg-zinc-700 transition text-left">
+                <i class="fa-solid fa-magnifying-glass text-brand-500"></i>
+                <span>Search news, topics, authors...</span>
+            </button>
+        </div>
+
+        <!-- Navigation Sections -->
+        <div class="p-6 space-y-6 flex-1">
+            <div>
+                <h4 class="text-[11px] font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400 mb-3">Primary Desks</h4>
+                <ul class="space-y-2 text-sm font-semibold">
+                    <li>
+                        <a href="/" class="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200 transition">
+                            <span class="flex items-center gap-2.5"><i class="fa-solid fa-fire text-editorial-red"></i> Top Stories</span>
+                            <i class="fa-solid fa-chevron-right text-xs text-zinc-400"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/category/world" class="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200 transition">
+                            <span class="flex items-center gap-2.5"><i class="fa-solid fa-globe text-brand-500"></i> World Affairs</span>
+                            <i class="fa-solid fa-chevron-right text-xs text-zinc-400"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/category/technology" class="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200 transition">
+                            <span class="flex items-center gap-2.5"><i class="fa-solid fa-microchip text-emerald-500"></i> Technology</span>
+                            <i class="fa-solid fa-chevron-right text-xs text-zinc-400"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/category/business" class="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200 transition">
+                            <span class="flex items-center gap-2.5"><i class="fa-solid fa-chart-line text-purple-500"></i> Business & Finance</span>
+                            <i class="fa-solid fa-chevron-right text-xs text-zinc-400"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/category/climate" class="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200 transition">
+                            <span class="flex items-center gap-2.5"><i class="fa-solid fa-leaf text-teal-500"></i> Climate & Science</span>
+                            <i class="fa-solid fa-chevron-right text-xs text-zinc-400"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="p-4 bg-zinc-100 dark:bg-zinc-950 border-t border-zinc-200 dark:border-zinc-800 text-center text-xs text-zinc-500">
+            <p>&copy; 2026 The Global Chronicle</p>
+        </div>
+    </aside>
+
+    <!-- Global Client Script for Theme, Drawer, Search, Bookmarks -->
+    <script is:inline>
+        let currentActiveArticleId = null;
+        const savedArticles = new Set();
+
+        const articlesDB = {
+            'hero-big-post': {
+                title: "Historic Summit Yields Binding Accord on AI Safeguards and Clean Energy Transition",
+                category: "World & Climate",
+                author: "Sarah Jenkins, Chief International Editor",
+                time: "22 mins ago",
+                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop",
+                body: `<p class="font-serif text-lg leading-relaxed font-semibold">Delegates representing over 140 sovereign nations have finalized an unprecedented multilateral agreement in Geneva aimed at establishing global safety guardrails for frontier artificial intelligence models while channeling capital into renewable infrastructure.</p><p>The landmark accord mandates open auditing standards for compute deployments exceeding 10^26 FLOPs, alongside a $400 billion climate modernization vehicle.</p>`
+            },
+            'list-post-1': {
+                title: "Global Semiconductor Shares Surge Following Breakthrough Microchip Node Announcement",
+                category: "Markets & Tech",
+                author: "David Vance",
+                time: "45 mins ago",
+                image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop",
+                body: "<p>Leading chip fabrication foundries reported an extraordinary manufacturing yield breakthrough on 1-nanometer transistor architectures today.</p>"
+            }
+        };
+
+        function toggleDarkMode() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+            const icon = document.getElementById('theme-toggle-icon');
+            if (icon) {
+                icon.className = document.documentElement.classList.contains('dark') 
+                    ? 'fa-solid fa-sun text-amber-400' 
+                    : 'fa-solid fa-moon text-sm';
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('menu-backdrop');
+            if (!menu || !backdrop) return;
+
+            const isOpen = !menu.classList.contains('-translate-x-full');
+            if (isOpen) {
+                menu.classList.add('-translate-x-full');
+                backdrop.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            } else {
+                menu.classList.remove('-translate-x-full');
+                backdrop.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function toggleSearchModal() {
+            const modal = document.getElementById('search-modal');
+            if (!modal) return;
+            modal.classList.toggle('hidden');
+            if (!modal.classList.contains('hidden')) {
+                const input = document.getElementById('search-input');
+                if (input) input.focus();
+            }
+        }
+
+        function handleSearch(query) {
+            const container = document.getElementById('search-results');
+            if (!container) return;
+            if (!query.trim()) {
+                container.innerHTML = '<p class="text-zinc-500 text-xs p-2">Type keywords like "Climate", "Quantum", "Chips" to filter news...</p>';
+                return;
+            }
+
+            const results = Object.keys(articlesDB).filter(key => {
+                const a = articlesDB[key];
+                return a.title.toLowerCase().includes(query.toLowerCase()) || 
+                       a.category.toLowerCase().includes(query.toLowerCase());
+            });
+
+            if (results.length === 0) {
+                container.innerHTML = '<p class="text-zinc-500 text-xs p-2">No matching articles found for "' + query + '"</p>';
+            } else {
+                container.innerHTML = results.map(id => {
+                    const article = articlesDB[id];
+                    return `
+                        <div class="p-3 hover:bg-zinc-100 dark:hover:bg-zinc-800 cursor-pointer rounded transition" onclick="toggleSearchModal(); openArticleModal('${id}')">
+                            <span class="text-[10px] font-bold uppercase text-brand-500">${article.category}</span>
+                            <h4 class="font-serif font-bold text-zinc-900 dark:text-zinc-100 text-sm">${article.title}</h4>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        function toggleBookmarksDrawer() {
+            const drawer = document.getElementById('bookmarks-drawer');
+            if (drawer) drawer.classList.toggle('translate-x-full');
+        }
+
+        function openArticleModal(articleId) {
+            const article = articlesDB[articleId] || {
+                title: "Dispatch News Report",
+                category: "General",
+                author: "Chronicle Journalist",
+                time: "Recently Updated",
+                image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=800",
+                body: "<p>Full reporting for this news dispatch is currently being transmitted by our international desk team.</p>"
+            };
+
+            currentActiveArticleId = articleId;
+            document.getElementById('modal-title').textContent = article.title;
+            document.getElementById('modal-category').textContent = article.category;
+            document.getElementById('modal-author').textContent = article.author;
+            document.getElementById('modal-time').textContent = article.time;
+            document.getElementById('modal-image').src = article.image;
+            document.getElementById('modal-body').innerHTML = article.body;
+
+            const modal = document.getElementById('article-modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeArticleModal() {
+            const modal = document.getElementById('article-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                toggleSearchModal();
+            }
+            if (e.key === 'Escape') {
+                closeArticleModal();
+            }
+        });
+    </script>
+</body>
+</html>

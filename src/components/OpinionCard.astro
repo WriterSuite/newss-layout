@@ -1,0 +1,53 @@
+---
+export interface Props {
+  authorName: string;
+  authorTitle: string;
+  authorAvatar?: string;
+  articleTitle: string;
+  categoryTag?: string;
+  quote?: string;
+  articleSlug?: string;
+}
+
+const { 
+  authorName, 
+  authorTitle, 
+  authorAvatar = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop', 
+  articleTitle, 
+  categoryTag = 'Opinion & Commentary',
+  quote,
+  articleSlug = 'historic-summit-yields-accord-on-ai-safeguards'
+} = Astro.props;
+---
+
+<article class="article-card bg-amber-50 dark:bg-zinc-900 border border-amber-200/80 dark:border-zinc-800 rounded-2xl p-6 flex flex-col justify-between shadow-xs group cursor-pointer">
+    <a href={`/article/${articleSlug}`} class="block h-full flex flex-col justify-between">
+        <div>
+            <div class="flex items-center justify-between mb-4">
+                <span class="bg-amber-200 dark:bg-amber-900/50 text-amber-900 dark:text-amber-300 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded">
+                    <i class="fa-solid fa-quote-left mr-1"></i> {categoryTag}
+                </span>
+                <span class="text-xs text-amber-700 dark:text-amber-400 font-serif italic">Sunday Read</span>
+            </div>
+
+            <div class="relative my-2">
+                <p class="font-serif text-xl font-bold italic text-zinc-900 dark:text-zinc-100 leading-snug group-hover:text-amber-700 dark:group-hover:text-amber-400 transition">
+                    "{quote || articleTitle}"
+                </p>
+            </div>
+            {!quote && (
+                <p class="text-xs text-zinc-600 dark:text-zinc-400 mt-4 leading-relaxed line-clamp-3">
+                    {articleTitle}
+                </p>
+            )}
+        </div>
+
+        <div class="pt-6 border-t border-amber-200 dark:border-zinc-800 flex items-center gap-3 mt-6">
+            <img src={authorAvatar} alt={authorName} class="w-10 h-10 rounded-full object-cover border-2 border-amber-400">
+            <div>
+                <p class="text-xs font-bold text-zinc-900 dark:text-zinc-100">{authorName}</p>
+                <p class="text-[10px] text-zinc-500">{authorTitle}</p>
+            </div>
+        </div>
+    </a>
+</article>

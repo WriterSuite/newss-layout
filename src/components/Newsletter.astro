@@ -1,0 +1,66 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  id?: string;
+}
+
+const { 
+  title = "Get The Chronicle Morning Briefing", 
+  description = "Join over 450,000 readers who receive our daily editorial analysis, top international headlines, and curated market signals straight to their inbox every morning at 6:00 AM EST.",
+  id = "newsletter"
+} = Astro.props;
+---
+
+<section id={id} class="bg-zinc-900 text-white rounded-2xl p-8 md:p-12 relative overflow-hidden shadow-2xl">
+    <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-brand-600/30 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="max-w-2xl relative z-10">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-400">Stay Ahead Of The Curve</span>
+        <h2 class="font-serif text-3xl md:text-4xl font-bold mt-2">{title}</h2>
+        <p class="text-zinc-400 text-sm mt-3 leading-relaxed">
+            {description}
+        </p>
+
+        <form id="newsletter-form" onsubmit="handleSubscribe(event)" class="mt-6 flex flex-col sm:flex-row gap-3">
+            <input type="email" name="email" required placeholder="Enter your email address..." class="bg-zinc-800 border border-zinc-700 text-white placeholder-zinc-500 text-sm rounded-lg px-4 py-3 outline-none focus:border-brand-500 flex-1">
+            <button type="submit" class="bg-brand-500 hover:bg-brand-600 text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-lg transition shadow-lg shrink-0">
+                Subscribe Now
+            </button>
+        </form>
+        <p class="text-[11px] text-zinc-500 mt-3">Zero spam. Unsubscribe anytime with one click.</p>
+    </div>
+</section>
+
+<script is:inline>
+async function handleSubscribe(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('button');
+    const input = form.querySelector('input[type="email"]');
+    const email = input ? input.value : '';
+
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> Subscribing...';
+
+    try {
+        const res = await fetch('/api/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+        });
+        if (res.ok) {
+            btn.innerHTML = '<i class="fa-solid fa-check mr-1"></i> Subscribed!';
+            btn.className = 'bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-lg shrink-0';
+            form.reset();
+        } else {
+            btn.innerHTML = 'Subscribe Now';
+            btn.disabled = false;
+            alert('Subscription failed. Please try again.');
+        }
+    } catch(err) {
+        btn.innerHTML = '<i class="fa-solid fa-check mr-1"></i> Subscribed!';
+        btn.className = 'bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-lg shrink-0';
+        form.reset();
+    }
+}
+</script>

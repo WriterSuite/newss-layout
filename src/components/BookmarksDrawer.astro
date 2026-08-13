@@ -1,0 +1,14 @@
+---
+---
+
+<div id="bookmarks-drawer" class="fixed inset-y-0 right-0 z-50 w-80 bg-white dark:bg-zinc-900 border-l border-zinc-200 dark:border-zinc-800 shadow-2xl transform translate-x-full transition-transform duration-300 p-6 flex flex-col">
+    <div class="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-4">
+        <h3 class="font-serif font-bold text-lg flex items-center gap-2 text-zinc-900 dark:text-zinc-100">
+            <i class="fa-solid fa-bookmark text-brand-500"></i> Saved Articles
+        </h3>
+        <button onclick="toggleBookmarksDrawer()" class="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200" aria-label="Close Bookmarks"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div id="saved-articles-list" class="flex-1 overflow-y-auto py-4 space-y-3">
+        <p class="text-xs text-zinc-500 italic">No saved articles yet. Click the bookmark icon on any article to save for later.</p>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+---
+---
+
+<div id="search-modal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm p-4 flex justify-center items-start pt-20">
+    <div class="bg-white dark:bg-zinc-900 w-full max-w-2xl rounded-2xl shadow-2xl p-6 border border-zinc-200 dark:border-zinc-800">
+        <div class="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-4">
+            <div class="flex items-center gap-3 w-full">
+                <i class="fa-solid fa-magnifying-glass text-zinc-400 text-lg"></i>
+                <input type="text" id="search-input" onkeyup="handleSearch(this.value)" placeholder="Search articles, topics, authors..." class="w-full bg-transparent text-lg outline-none text-zinc-900 dark:text-white">
+            </div>
+            <button onclick="toggleSearchModal()" class="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200" aria-label="Close Search"><i class="fa-solid fa-xmark text-xl"></i></button>
+        </div>
+        <div id="search-results" class="mt-4 max-h-60 overflow-y-auto divide-y divide-zinc-100 dark:divide-zinc-800 text-sm">
+            <p class="text-zinc-500 text-xs p-2">Type keywords like "Climate", "Quantum", "Chips" to filter news...</p>
+        </div>
+    </div>
+</div>

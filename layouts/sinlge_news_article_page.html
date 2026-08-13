@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historic Summit Yields Binding Accord on AI Safeguards - The Global Chronicle</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            900: '#0c4a6e',
+                        },
+                        editorial: {
+                            red: '#cc0000',
+                            dark: '#121212',
+                            gray: '#1f2937',
+                            lightBg: '#f8f9fa',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .drop-cap::first-letter {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 3.75rem;
+            line-height: 0.85;
+            float: left;
+            margin-top: 0.1em;
+            margin-right: 0.15em;
+            margin-bottom: -0.1em;
+            font-weight: 800;
+            color: #0369a1;
+        }
+        .dark .drop-cap::first-letter {
+            color: #38bdf8;
+        }
+        .article-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .article-card:hover {
+            transform: translateY(-4px);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-editorial-lightBg dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 font-sans antialiased transition-colors duration-200">
+
+    <header class="border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 sticky top-0 z-40 shadow-sm">
+        <div class="bg-zinc-900 text-zinc-200 text-xs py-1.5 px-4">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+                <div class="flex items-center gap-4 text-zinc-400">
+                    <span id="current-date" class="font-medium text-zinc-300">Sunday, August 9, 2026</span>
+                    <span class="hidden sm:inline">•</span>
+                    <span class="hidden sm:flex items-center gap-1.5 text-zinc-300">
+                        <i class="fa-solid fa-cloud-sun text-amber-400"></i> Geneva, 68°F
+                    </span>
+                    <span class="hidden md:inline">•</span>
+                    <span class="hidden md:inline text-emerald-400 font-mono"><i class="fa-solid fa-arrow-trend-up mr-1"></i>S&P 500 +0.84%</span>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <span class="text-zinc-400 text-[11px] hidden lg:inline"><i class="fa-solid fa-shield-halved text-brand-500 mr-1"></i> Verified Newsroom Feed</span>
+                    <button id="theme-toggle" onclick="toggleDarkMode()" class="text-zinc-400 hover:text-white transition-colors" title="Toggle Dark/Light Mode">
+                        <i class="fa-solid fa-moon text-sm" id="theme-toggle-icon"></i>
+                    </button>
+                    <a href="#newsletter-sidebar" class="text-xs text-brand-400 font-semibold hover:text-brand-300">Subscribe</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 py-4 sm:py-6">
+            <div class="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-4 sm:pb-6">
+                <!-- Left Action Buttons -->
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleMobileMenu()" class="p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300" aria-label="Open Navigation Menu">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                    <button onclick="toggleSearchModal()" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-500 text-xs hover:bg-zinc-200 dark:hover:bg-zinc-700 transition">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <span>Search articles...</span>
+                        <kbd class="ml-2 font-mono text-[10px] bg-white dark:bg-zinc-900 px-1.5 py-0.5 rounded shadow-xs">⌘K</kbd>
+                    </button>
+                </div>
+
+                <!-- Brand Logo -->
+                <div class="text-center">
+                    <a href="#" class="inline-block">
+                        <h1 class="font-serif text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-zinc-950 dark:text-white uppercase">
+                            The Global Chronicle
+                        </h1>
+                    </a>
+                    <p class="text-[10px] sm:text-xs text-zinc-500 tracking-widest uppercase mt-0.5 font-sans font-medium">
+                        International Edition &bull; Truth in Reporting &bull; Est. 1898
+                    </p>
+                </div>
+
+                <!-- Right Utility Buttons -->
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleBookmarksDrawer()" class="relative p-2 text-zinc-700 dark:text-zinc-300 hover:text-brand-600 dark:hover:text-brand-500">
+                        <i class="fa-regular fa-bookmark text-xl"></i>
+                        <span id="bookmark-badge" class="hidden absolute top-0 right-0 w-2.5 h-2.5 bg-editorial-red rounded-full"></span>
+                    </button>
+                    <a href="#" class="hidden sm:block px-4 py-2 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-xs font-bold uppercase tracking-wider rounded hover:bg-brand-600 dark:hover:bg-brand-500 transition shadow-sm">
+                        Get e-Paper
+                    </a>
+                </div>
+            </div>
+
+            <!-- CATEGORY BAR -->
+            <nav class="flex items-center justify-between overflow-x-auto py-2.5 no-scrollbar text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+                <div class="flex items-center space-x-6 shrink-0">
+                    <a href="#" class="hover:text-brand-600 transition">Top Stories</a>
+                    <a href="#" class="text-brand-600 dark:text-brand-400 border-b-2 border-brand-600 dark:border-brand-400 pb-1">World Affairs</a>
+                    <a href="#" class="hover:text-brand-600 transition">Technology</a>
+                    <a href="#" class="hover:text-brand-600 transition">Business & Finance</a>
+                    <a href="#" class="hover:text-brand-600 transition">Climate & Science</a>
+                    <a href="#" class="hover:text-brand-600 transition">Opinion</a>
+                    <a href="#" class="hover:text-brand-600 transition">Culture</a>
+                </div>
+                <span class="text-[11px] font-mono text-zinc-400 hidden lg:inline"><i class="fa-solid fa-clock-rotate-left mr-1"></i> Updated 12m ago</span>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- BREADCRUMBS & ARTICLE CATEGORY TAG -->
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-4">
+            <nav class="flex items-center gap-2 text-xs font-semibold text-zinc-500 dark:text-zinc-400">
+                <a href="#" class="hover:underline">Home</a>
+                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                <a href="#" class="hover:underline">World Affairs</a>
+                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                <span class="text-brand-600 dark:text-brand-400 font-bold uppercase tracking-wider">Special Report</span>
+            </nav>
+
+            <!-- Text Size Resizer & Quick Actions -->
+            <div class="flex items-center gap-4 text-xs font-semibold">
+                <span class="text-zinc-400 hidden sm:inline">Text Size:</span>
+                <div class="flex items-center border border-zinc-200 dark:border-zinc-700 rounded-lg overflow-hidden bg-white dark:bg-zinc-900">
+                    <button onclick="changeFontSize(-1)" class="px-2.5 py-1 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-300" title="Decrease font size">A-</button>
+                    <button onclick="changeFontSize(0)" class="px-2.5 py-1 hover:bg-zinc-100 dark:hover:bg-zinc-800 border-x border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-100 font-bold" title="Reset font size">A</button>
+                    <button onclick="changeFontSize(1)" class="px-2.5 py-1 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-300" title="Increase font size">A+</button>
+                </div>
+                <button onclick="toggleBookmarkCurrentArticle('hero-big-post')" id="main-article-bookmark-btn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition">
+                    <i id="main-bookmark-icon" class="fa-regular fa-bookmark"></i>
+                    <span id="main-bookmark-text">Save</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ARTICLE HEADER BANNER -->
+        <header class="space-y-4 max-w-4xl">
+            <div class="flex items-center gap-3">
+                <span class="bg-editorial-red text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded">
+                    Global Geopolitics
+                </span>
+                <span class="text-xs text-zinc-500 font-mono"><i class="fa-regular fa-clock mr-1"></i> 8 Min Read</span>
+                <span class="text-xs text-emerald-600 dark:text-emerald-400 font-semibold"><i class="fa-solid fa-check-circle mr-1"></i> Peer Reviewed Reporting</span>
+            </div>
+
+            <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-extrabold text-zinc-950 dark:text-white leading-[1.15] tracking-tight">
+                Historic Summit Yields Binding Accord on AI Safeguards and Clean Energy Transition
+            </h1>
+
+            <p class="text-lg sm:text-xl text-zinc-600 dark:text-zinc-300 font-serif italic leading-relaxed">
+                Delegates representing 140 nations in Geneva establish enforceable compute caps for frontier neural networks alongside a $400B deep-tech climate transition capital allocation.
+            </p>
+
+            <!-- Author Byline & Social Sharing Row -->
+            <div class="pt-4 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150&auto=format&fit=crop" alt="Sarah Jenkins" class="w-12 h-12 rounded-full object-cover ring-2 ring-brand-500">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h3 class="font-bold text-sm text-zinc-900 dark:text-zinc-100">Sarah Jenkins</h3>
+                            <span class="text-[10px] bg-brand-100 dark:bg-brand-950 text-brand-600 dark:text-brand-400 px-2 py-0.5 rounded font-semibold uppercase">Chief Editor</span>
+                        </div>
+                        <p class="text-xs text-zinc-500">Reporting live from Palais des Nations, Geneva &bull; Aug 9, 2026</p>
+                    </div>
+                </div>
+
+                <!-- Social Sharing Buttons -->
+                <div class="flex items-center gap-2 text-zinc-500 dark:text-zinc-400">
+                    <span class="text-xs font-bold uppercase tracking-wider mr-1 text-zinc-400">Share:</span>
+                    <button onclick="shareLink('twitter')" class="w-9 h-9 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center hover:bg-brand-500 hover:text-white transition" title="Share on Twitter">
+                        <i class="fa-brands fa-x-twitter text-sm"></i>
+                    </button>
+                    <button onclick="shareLink('linkedin')" class="w-9 h-9 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition" title="Share on LinkedIn">
+                        <i class="fa-brands fa-linkedin-in text-sm"></i>
+                    </button>
+                    <button onclick="shareLink('facebook')" class="w-9 h-9 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center hover:bg-blue-800 hover:text-white transition" title="Share on Facebook">
+                        <i class="fa-brands fa-facebook-f text-sm"></i>
+                    </button>
+                    <button onclick="copyArticleLink()" class="w-9 h-9 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition" title="Copy Link">
+                        <i class="fa-solid fa-link text-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- TWO-COLUMN MAIN ARTICLE GRID (ARTICLE CONTENT LEFT + SIDEBAR RIGHT) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+
+            <!-- LEFT COLUMN: ARTICLE CONTENT (8 COLS) -->
+            <article class="lg:col-span-8 space-y-8" id="article-body-container">
+
+                <!-- FEATURED COVER IMAGE WITH CAPTION -->
+                <figure class="space-y-2">
+                    <div class="aspect-[16/9] rounded-2xl overflow-hidden bg-zinc-900 relative shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop" 
+                             alt="Geneva International Summit Conference Center" 
+                             class="w-full h-full object-cover">
+                        <div class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-mono px-3 py-1 rounded">
+                            <i class="fa-solid fa-camera mr-1"></i> Photo: UN Newsroom / Reuters
+                        </div>
+                    </div>
+                    <figcaption class="text-xs text-zinc-500 dark:text-zinc-400 italic leading-normal">
+                        Delegates from 140 member nations assemble inside the Assembly Hall at the Palais des Nations in Geneva as the final vote on AI governance and green capital allocation is recorded.
+                    </figcaption>
+                </figure>
+
+                <!-- AUDIO NARRATION PLAYER WIDGET -->
+                <div class="bg-gradient-to-r from-brand-900 to-zinc-900 text-white rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-md border border-brand-800/40">
+                    <div class="flex items-center gap-3">
+                        <button onclick="toggleAudioNarration(this)" class="w-12 h-12 rounded-full bg-brand-500 hover:bg-brand-400 text-white flex items-center justify-center text-lg shadow-lg shrink-0 transition">
+                            <i class="fa-solid fa-play ml-0.5"></i>
+                        </button>
+                        <div>
+                            <span class="text-[10px] uppercase tracking-widest text-brand-300 font-bold">Audio Edition</span>
+                            <h4 class="font-serif font-bold text-sm">Listen to full article narration</h4>
+                            <p class="text-[11px] text-zinc-400 font-mono">Duration: 8 mins 42 secs &bull; Narrated by Chronicle AI Voice</p>
+                        </div>
+                    </div>
+                    <div class="w-full sm:w-32 bg-zinc-800 h-2 rounded-full overflow-hidden relative">
+                        <div id="audio-progress" class="bg-brand-400 h-full w-0 transition-all duration-300"></div>
+                    </div>
+                </div>
+
+                <!-- KEY TAKEAWAYS CALLOUT BOX -->
+                <div class="bg-amber-50/80 dark:bg-zinc-900/90 border-l-4 border-amber-500 rounded-r-xl p-6 space-y-3 shadow-xs">
+                    <h3 class="font-serif font-bold text-base text-amber-900 dark:text-amber-400 flex items-center gap-2">
+                        <i class="fa-solid fa-bolt text-amber-500"></i> Executive Summary & Key Directives
+                    </h3>
+                    <ul class="space-y-2 text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 list-disc list-inside leading-relaxed font-medium">
+                        <li>Mandatory third-party security audits prior to deploying frontier neural models exceeding $100M compute cost.</li>
+                        <li>Creation of a $400 billion green technology finance facility targeting solar, geothermal, and grid resilience in developing nations.</li>
+                        <li>Establishment of the International AI Safety Secretariat in Geneva starting Q1 2027.</li>
+                        <li>Standardized watermarking protocols for synthetically generated news and media formats.</li>
+                    </ul>
+                </div>
+
+                <!-- ARTICLE PARAGRAPHS CONTENT -->
+                <div class="prose dark:prose-invert max-w-none space-y-6 text-zinc-800 dark:text-zinc-200 text-base sm:text-lg leading-relaxed font-sans" id="article-text-body">
+                    <p class="drop-cap">
+                        Following fourteen consecutive days of intense closed-door deliberations, diplomatic envoys representing over 140 sovereign states signed a monumental multilateral treaty designed to balance frontier technological innovation with systemic planetary risks. The Geneva Accord establishes the first globally binding framework governing artificial intelligence models trained on mega-compute clusters.
+                    </p>
+
+                    <p>
+                        The agreement arrives at a critical inflection point for global technology policy. Over the past three years, the exponential acceleration of synthetic intelligence systems has raised fundamental questions regarding economic stability, labor force transitions, and information integrity across democratic institutions.
+                    </p>
+
+                    <!-- Embedded Quote Card -->
+                    <blockquote class="my-8 border-l-4 border-brand-600 dark:border-brand-400 pl-6 italic font-serif text-xl sm:text-2xl text-zinc-900 dark:text-white font-semibold leading-snug">
+                        "We have proven today that global statecraft remains capable of matching the relentless velocity of technological evolution."
+                        <span class="block text-xs font-sans font-normal text-zinc-500 dark:text-zinc-400 mt-2 not-italic">
+                            &mdash; Elena Rostova, UN High Commissioner for Digital Affairs
+                        </span>
+                    </blockquote>
+
+                    <p>
+                        Under the terms of the treaty, any tech entity constructing computational models exceeding 10^26 Floating Point Operations (FLOPs) must register the system's architecture with the newly established International AI Safety Secretariat. The body will maintain sovereign oversight authority to verify model safety guardrails and prevent autonomous replication vulnerabilities.
+                    </p>
+
+                    <!-- Embedded Data Infographic Card -->
+                    <div class="my-8 bg-zinc-900 text-white rounded-2xl p-6 sm:p-8 space-y-4 shadow-xl">
+                        <div class="flex justify-between items-center border-b border-zinc-800 pb-3">
+                            <span class="text-xs font-mono uppercase tracking-widest text-brand-400 font-bold">Global Capital Commitments</span>
+                            <span class="text-xs text-zinc-500 font-mono">2026 - 2030 Roadmap</span>
+                        </div>
+                        <h4 class="font-serif font-bold text-xl sm:text-2xl">Allocation of the $400B Deep-Tech Fund</h4>
+                        
+                        <div class="space-y-3 pt-2 text-xs font-semibold">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>Sub-Saharan Solar & Grid Storage (40%)</span>
+                                    <span class="font-mono text-brand-400">$160 Billion</span>
+                                </div>
+                                <div class="w-full bg-zinc-800 h-2.5 rounded-full overflow-hidden">
+                                    <div class="bg-brand-500 h-full w-[40%]"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>Geothermal & Tidal Next-Gen Reactors (30%)</span>
+                                    <span class="font-mono text-emerald-400">$120 Billion</span>
+                                </div>
+                                <div class="w-full bg-zinc-800 h-2.5 rounded-full overflow-hidden">
+                                    <div class="bg-emerald-500 h-full w-[30%]"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>AI Safety Verification Labs (20%)</span>
+                                    <span class="font-mono text-purple-400">$80 Billion</span>
+                                </div>
+                                <div class="w-full bg-zinc-800 h-2.5 rounded-full overflow-hidden">
+                                    <div class="bg-purple-500 h-full w-[20%]"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>Sovereign Compute Credits for Research (10%)</span>
+                                    <span class="font-mono text-amber-400">$40 Billion</span>
+                                </div>
+                                <div class="w-full bg-zinc-800 h-2.5 rounded-full overflow-hidden">
+                                    <div class="bg-amber-500 h-full w-[10%]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>
+                        In parallel, the accord integrates a landmark climate finance mechanism. A $400 billion international liquidity pool, capitalized by sovereign wealth funds and private deep-tech coalitions, will directly subsidize green power infrastructure required to feed the immense electrical consumption of next-generation data centers.
+                    </p>
+
+                    <p>
+                        "You cannot isolate computational progress from environmental reality," explained Dr. Marcus Chen, Chief Technologist at the European Clean Compute Initiative. "By tying hardware compute limits directly to clean energy generation milestones, we align market incentives with planetary longevity."
+                    </p>
+                </div>
+
+                <!-- ARTICLE TAGS & FOOTNOTE -->
+                <div class="pt-6 border-t border-zinc-200 dark:border-zinc-800 space-y-4">
+                    <div class="flex flex-wrap items-center gap-2 text-xs font-semibold">
+                        <span class="text-zinc-400 font-mono">Topics:</span>
+                        <a href="#" class="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 hover:bg-brand-500 hover:text-white rounded-full transition">#ArtificialIntelligence</a>
+                        <a href="#" class="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 hover:bg-brand-500 hover:text-white rounded-full transition">#GenevaAccord</a>
+                        <a href="#" class="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 hover:bg-brand-500 hover:text-white rounded-full transition">#ClimateTech</a>
+                        <a href="#" class="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 hover:bg-brand-500 hover:text-white rounded-full transition">#GlobalEconomy</a>
+                    </div>
+
+                    <!-- AUTHOR PROFILE CARD -->
+                    <div class="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 flex flex-col sm:flex-row items-center sm:items-start gap-4">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop" alt="Sarah Jenkins" class="w-16 h-16 rounded-full object-cover shrink-0 border-2 border-brand-500">
+                        <div class="text-center sm:text-left space-y-1">
+                            <h4 class="font-serif font-bold text-base text-zinc-900 dark:text-zinc-100">About Sarah Jenkins</h4>
+                            <p class="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                                Sarah Jenkins is the Chief International Editor for The Global Chronicle, specializing in multilateral treaties, technological regulation, and macroeconomics. Based in Geneva.
+                            </p>
+                            <div class="pt-2 flex justify-center sm:justify-start gap-3 text-xs font-semibold text-brand-600 dark:text-brand-400">
+                                <a href="#" class="hover:underline"><i class="fa-brands fa-x-twitter mr-1"></i> @s_jenkins_news</a>
+                                <span>&bull;</span>
+                                <a href="#" class="hover:underline">View All Articles (248)</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- READER COMMENTS SECTION -->
+                <section class="pt-6 border-t border-zinc-200 dark:border-zinc-800 space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-serif font-bold text-xl sm:text-2xl text-zinc-950 dark:text-white flex items-center gap-2">
+                            <i class="fa-regular fa-comments text-brand-500"></i> Reader Community Discussion (48)
+                        </h3>
+                        <span class="text-xs text-zinc-500 font-mono">Chronicle Verified Comments</span>
+                    </div>
+
+                    <!-- Comment Input Box -->
+                    <form onsubmit="handleCommentSubmit(event)" class="space-y-3 bg-zinc-100 dark:bg-zinc-900/60 p-4 rounded-xl border border-zinc-200 dark:border-zinc-800">
+                        <textarea required rows="3" placeholder="Share your perspective on the Geneva Accord..." class="w-full bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-lg p-3 text-sm text-zinc-900 dark:text-zinc-100 outline-none focus:border-brand-500 transition"></textarea>
+                        <div class="flex justify-between items-center">
+                            <span class="text-[11px] text-zinc-500">Subject to Chronicle Editorial Guidelines</span>
+                            <button type="submit" class="px-5 py-2 bg-brand-600 hover:bg-brand-500 text-white font-bold text-xs uppercase tracking-wider rounded-lg transition shadow-sm">
+                                Post Comment
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Sample Comment 1 -->
+                    <div class="space-y-4 divide-y divide-zinc-100 dark:divide-zinc-800">
+                        <div class="pt-4 first:pt-0 space-y-2">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="font-bold text-zinc-900 dark:text-zinc-100">Prof. Alexander Vance &bull; Oxford Institute</span>
+                                <span class="text-zinc-400 font-mono">2 hours ago</span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                                The inclusion of compute thresholds (10^26 FLOPs) is a pragmatic compromise. However, enforcement mechanisms will depend heavily on satellite hardware telemetry auditing capabilities.
+                            </p>
+                            <div class="flex items-center gap-4 text-xs text-zinc-500">
+                                <button class="hover:text-brand-500 flex items-center gap-1"><i class="fa-regular fa-thumbs-up"></i> 124</button>
+                                <button class="hover:text-brand-500">Reply</button>
+                            </div>
+                        </div>
+
+                        <!-- Sample Comment 2 -->
+                        <div class="pt-4 space-y-2">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="font-bold text-zinc-900 dark:text-zinc-100">Elena Rostova &bull; Geneva Policy Fellow</span>
+                                <span class="text-zinc-400 font-mono">4 hours ago</span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                                Crucially, the $400B green energy allocation directly solves the energy bottleneck for next-gen data centers while expanding microgrids in rural communities.
+                            </p>
+                            <div class="flex items-center gap-4 text-xs text-zinc-500">
+                                <button class="hover:text-brand-500 flex items-center gap-1"><i class="fa-regular fa-thumbs-up"></i> 89</button>
+                                <button class="hover:text-brand-500">Reply</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </article>
+
+            <!-- RIGHT SIDEBAR (4 COLS) -->
+            <aside class="lg:col-span-4 space-y-8">
+
+                <!-- SIDEBAR WIDGET 1: NEWSLETTER SUBSCRIPTION CARD -->
+                <div id="newsletter-sidebar" class="bg-gradient-to-br from-zinc-900 via-zinc-950 to-brand-950 text-white rounded-2xl p-6 border border-zinc-800 shadow-xl relative overflow-hidden">
+                    <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-brand-500/20 rounded-full blur-2xl"></div>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-brand-400">Daily Morning Briefing</span>
+                    <h3 class="font-serif text-2xl font-bold mt-1">Stay Ahead of Global Events</h3>
+                    <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
+                        Get our top international reporting and editorial analysis delivered straight to your inbox at 6:00 AM EST.
+                    </p>
+                    <form onsubmit="handleSubscribe(event)" class="mt-4 space-y-2">
+                        <input type="email" required placeholder="Your email address..." class="w-full bg-zinc-800/90 border border-zinc-700 text-white placeholder-zinc-500 text-xs rounded-lg px-3.5 py-2.5 outline-none focus:border-brand-500">
+                        <button type="submit" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold text-xs uppercase tracking-wider py-2.5 rounded-lg transition shadow-md">
+                            Subscribe Free
+                        </button>
+                    </form>
+                    <p class="text-[10px] text-zinc-500 mt-2 text-center">450,000+ subscribers &bull; Unsubscribe anytime</p>
+                </div>
+
+                <!-- SIDEBAR WIDGET 2: MOST READ / TRENDING RANKED LIST -->
+                <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-xs space-y-4">
+                    <div class="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-3">
+                        <h3 class="font-serif font-bold text-lg text-zinc-950 dark:text-white flex items-center gap-2">
+                            <i class="fa-solid fa-fire text-editorial-red"></i> Most Read Today
+                        </h3>
+                        <span class="text-[10px] font-mono text-zinc-400">Real-Time</span>
+                    </div>
+
+                    <div class="space-y-4 divide-y divide-zinc-100 dark:divide-zinc-800">
+
+                        <!-- Item 1 -->
+                        <article class="pt-3 first:pt-0 group cursor-pointer" onclick="alert('Opening dispatch...')">
+                            <div class="flex gap-3 items-start">
+                                <span class="font-serif text-2xl font-black text-brand-600 dark:text-brand-400 shrink-0 w-6">01</span>
+                                <div>
+                                    <span class="text-[10px] font-bold uppercase text-emerald-600 dark:text-emerald-400">Markets</span>
+                                    <h4 class="font-serif font-bold text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 group-hover:text-brand-600 transition-colors line-clamp-2">
+                                        Semiconductor Shares Surge Following 1nm Chip Yield Breakthrough
+                                    </h4>
+                                    <span class="text-[10px] text-zinc-400 mt-1 block">45m ago &bull; 12.4k views</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Item 2 -->
+                        <article class="pt-3 group cursor-pointer" onclick="alert('Opening dispatch...')">
+                            <div class="flex gap-3 items-start">
+                                <span class="font-serif text-2xl font-black text-brand-600 dark:text-brand-400 shrink-0 w-6">02</span>
+                                <div>
+                                    <span class="text-[10px] font-bold uppercase text-purple-600 dark:text-purple-400">Space Science</span>
+                                    <h4 class="font-serif font-bold text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 group-hover:text-brand-600 transition-colors line-clamp-2">
+                                        Orbital Telescope Confirms Water Vapor Atmosphere on Exoplanet LHS-3154b
+                                    </h4>
+                                    <span class="text-[10px] text-zinc-400 mt-1 block">2h ago &bull; 9.8k views</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Item 3 -->
+                        <article class="pt-3 group cursor-pointer" onclick="alert('Opening dispatch...')">
+                            <div class="flex gap-3 items-start">
+                                <span class="font-serif text-2xl font-black text-brand-600 dark:text-brand-400 shrink-0 w-6">03</span>
+                                <div>
+                                    <span class="text-[10px] font-bold uppercase text-amber-600 dark:text-amber-400">Mobility</span>
+                                    <h4 class="font-serif font-bold text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 group-hover:text-brand-600 transition-colors line-clamp-2">
+                                        Autonomous Shuttle Fleet Expands Commercial Routes to 12 Cities
+                                    </h4>
+                                    <span class="text-[10px] text-zinc-400 mt-1 block">3h ago &bull; 8.1k views</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Item 4 -->
+                        <article class="pt-3 group cursor-pointer" onclick="alert('Opening dispatch...')">
+                            <div class="flex gap-3 items-start">
+                                <span class="font-serif text-2xl font-black text-brand-600 dark:text-brand-400 shrink-0 w-6">04</span>
+                                <div>
+                                    <span class="text-[10px] font-bold uppercase text-rose-600 dark:text-rose-400">Cybersecurity</span>
+                                    <h4 class="font-serif font-bold text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 group-hover:text-brand-600 transition-colors line-clamp-2">
+                                        Subsea Telecom Cables Vulnerabilities Exposed in Deep Water Audit
+                                    </h4>
+                                    <span class="text-[10px] text-zinc-400 mt-1 block">5h ago &bull; 6.7k views</span>
+                                </div>
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+
+                <!-- SIDEBAR WIDGET 3: LIVE MARKET SNAPSHOT -->
+                <div class="bg-zinc-900 text-zinc-100 rounded-2xl p-6 shadow-md border border-zinc-800 space-y-3">
+                    <div class="flex items-center justify-between border-b border-zinc-800 pb-2">
+                        <span class="text-xs font-mono font-bold text-zinc-400 uppercase">Global Indices</span>
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 text-xs">
+                        <div class="p-2.5 bg-zinc-800/80 rounded-lg">
+                            <p class="text-zinc-400 text-[10px]">S&P 500</p>
+                            <p class="font-mono font-bold text-sm text-zinc-100">5,482.10</p>
+                            <p class="text-emerald-400 font-mono text-[10px]"><i class="fa-solid fa-caret-up"></i> +0.84%</p>
+                        </div>
+                        <div class="p-2.5 bg-zinc-800/80 rounded-lg">
+                            <p class="text-zinc-400 text-[10px]">NASDAQ</p>
+                            <p class="font-mono font-bold text-sm text-zinc-100">17,890.45</p>
+                            <p class="text-emerald-400 font-mono text-[10px]"><i class="fa-solid fa-caret-up"></i> +1.12%</p>
+                        </div>
+                        <div class="p-2.5 bg-zinc-800/80 rounded-lg">
+                            <p class="text-zinc-400 text-[10px]">FTSE 100</p>
+                            <p class="font-mono font-bold text-sm text-zinc-100">8,210.30</p>
+                            <p class="text-red-400 font-mono text-[10px]"><i class="fa-solid fa-caret-down"></i> -0.22%</p>
+                        </div>
+                        <div class="p-2.5 bg-zinc-800/80 rounded-lg">
+                            <p class="text-zinc-400 text-[10px]">BRENT CRUDE</p>
+                            <p class="font-mono font-bold text-sm text-zinc-100">$74.15</p>
+                            <p class="text-emerald-400 font-mono text-[10px]"><i class="fa-solid fa-caret-up"></i> +0.45%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SIDEBAR WIDGET 4: OPINION COLUMNIST SPOTLIGHT MINI -->
+                <div class="bg-amber-50 dark:bg-zinc-900 border border-amber-200 dark:border-zinc-800 rounded-2xl p-6 space-y-3">
+                    <span class="bg-amber-200 dark:bg-amber-900/50 text-amber-900 dark:text-amber-300 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded">
+                        Sunday Opinion Spotlight
+                    </span>
+                    <h4 class="font-serif font-bold text-base text-zinc-900 dark:text-zinc-100">
+                        "Why Deep Focus is Becoming the Most Scarce Economic Commodity"
+                    </h4>
+                    <p class="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                        When algorithmic noise occupies our waking hours, strategic synthesis becomes our primary defense.
+                    </p>
+                    <div class="flex items-center gap-3 pt-2 border-t border-amber-200 dark:border-zinc-800">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=120" alt="Dr. Aris Vance" class="w-8 h-8 rounded-full object-cover">
+                        <div>
+                            <p class="text-xs font-bold text-zinc-900 dark:text-zinc-100">Dr. Aris Vance</p>
+                            <p class="text-[10px] text-zinc-500">Oxford Cognitive Science</p>
+                        </div>
+                    </div>
+                </div>
+
+            </aside>
+
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- SUGGESTED POSTS BLOCK 1: SECTION 2 (3 UNIQUE POSTS GRID LAYOUT) -->
+        <!-- ========================================================================= -->
+        <section class="border-t-2 border-zinc-900 dark:border-zinc-100 pt-12 space-y-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-widest">
+                        <i class="fa-solid fa-layer-group"></i> Recommended Dispatches
+                    </div>
+                    <h2 class="font-serif text-3xl font-bold tracking-tight text-zinc-950 dark:text-white">Curated Spotlight</h2>
+                </div>
+                <p class="text-xs text-zinc-500 max-w-md">Three distinct editorial formats: Deep Investigation, Audio Dispatch, and Essay Opinion.</p>
+            </div>
+
+            <!-- THE 3 UNIQUE POSTS GRID -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <!-- UNIQUE POST 1: Investigation / High-Contrast Dark Editorial Card -->
+                <article class="article-card bg-zinc-950 text-white rounded-2xl p-6 flex flex-col justify-between shadow-xl relative overflow-hidden group cursor-pointer border border-zinc-800" onclick="openArticleModal('grid-post-1')">
+                    <div class="absolute -right-12 -top-12 w-40 h-40 bg-brand-600/20 rounded-full blur-3xl group-hover:bg-brand-500/30 transition"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="bg-red-600/90 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded">
+                                <i class="fa-solid fa-magnifying-glass mr-1"></i> Investigation
+                            </span>
+                            <span class="text-xs text-zinc-400 font-mono">Part 1 of 3</span>
+                        </div>
+
+                        <div class="my-4">
+                            <h3 class="font-serif text-2xl font-bold leading-snug group-hover:text-brand-400 transition">
+                                The Subsea Fiber Cables Powering the Global Economy Are Vulnerable
+                            </h3>
+                            <p class="text-zinc-400 text-xs mt-3 leading-relaxed">
+                                An exclusive investigation into the undersea telecom infrastructure carrying 99% of international data transits, and deep-water geopolitical tensions.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-zinc-800/80 flex items-center justify-between mt-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center font-bold text-xs text-brand-400 border border-zinc-700">
+                                MC
+                            </div>
+                            <div>
+                                <p class="text-xs font-semibold text-zinc-200">Marcus Chen</p>
+                                <p class="text-[10px] text-zinc-500">Cybersecurity Desk</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-zinc-500 group-hover:text-brand-400 transition"></i>
+                    </div>
+                </article>
+
+                <!-- UNIQUE POST 2: Multimedia / Audio Podcast Feature Card -->
+                <article class="article-card bg-gradient-to-br from-brand-900 to-indigo-950 text-white rounded-2xl p-6 flex flex-col justify-between shadow-xl relative overflow-hidden group border border-brand-800/50 cursor-pointer" onclick="openArticleModal('grid-post-2')">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="bg-indigo-500/30 border border-indigo-400/40 text-indigo-200 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded flex items-center gap-1.5">
+                                <i class="fa-solid fa-headphones text-indigo-300"></i> Audio Dispatch
+                            </span>
+                            <span class="text-xs text-indigo-200 font-mono">18 Min Episode</span>
+                        </div>
+
+                        <div class="relative rounded-xl overflow-hidden mb-4 aspect-video bg-zinc-900 shadow-md">
+                            <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=600&auto=format&fit=crop" alt="Podcast Studio" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                                <button onclick="event.stopPropagation(); toggleAudioSample(this)" class="w-12 h-12 bg-white/90 text-brand-900 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition">
+                                    <i class="fa-solid fa-play ml-1 text-lg"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <h3 class="font-serif text-xl font-bold leading-snug group-hover:text-indigo-200 transition">
+                            Chronicle Daily Podcast: Restoring Biodiversity in Megacities
+                        </h3>
+                    </div>
+
+                    <div class="pt-4 mt-2">
+                        <div class="bg-black/30 backdrop-blur-sm p-3 rounded-lg flex items-center justify-between text-xs text-indigo-200">
+                            <span class="truncate"><i class="fa-solid fa-waveform mr-2"></i>Ep 412: Urban Wilderness</span>
+                            <span class="font-mono text-[10px] bg-indigo-900/80 px-2 py-0.5 rounded">Listen</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- UNIQUE POST 3: Editorial Opinion Quote Card with Author Headshot -->
+                <article class="article-card bg-amber-50 dark:bg-zinc-900 border border-amber-200/80 dark:border-zinc-800 rounded-2xl p-6 flex flex-col justify-between shadow-xs group cursor-pointer" onclick="openArticleModal('grid-post-3')">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="bg-amber-200 dark:bg-amber-900/50 text-amber-900 dark:text-amber-300 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded">
+                                <i class="fa-solid fa-quote-left mr-1"></i> Essay & Opinion
+                            </span>
+                            <span class="text-xs text-amber-700 dark:text-amber-400 font-serif italic">Sunday Read</span>
+                        </div>
+
+                        <div class="relative my-2">
+                            <p class="font-serif text-xl font-bold italic text-zinc-900 dark:text-zinc-100 leading-snug group-hover:text-amber-700 dark:group-hover:text-amber-400 transition">
+                                "We are entering an era where critical thinking isn't just an educational metric—it is our primary defense against synthesized reality."
+                            </p>
+                        </div>
+                        <p class="text-xs text-zinc-600 dark:text-zinc-400 mt-4 leading-relaxed">
+                            A compelling argument on human cognitive resilience in the decade of hyper-automated media feeds.
+                        </p>
+                    </div>
+
+                    <div class="pt-6 border-t border-amber-200 dark:border-zinc-800 flex items-center gap-3 mt-6">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=120&auto=format&fit=crop" alt="Dr. Aris Vance" class="w-10 h-10 rounded-full object-cover border-2 border-amber-400">
+                        <div>
+                            <p class="text-xs font-bold text-zinc-900 dark:text-zinc-100">Dr. Aris Vance</p>
+                            <p class="text-[10px] text-zinc-500">Professor of Cognitive Science, Oxford</p>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- SUGGESTED POSTS BLOCK 2: SECTION 3 (MULTI-CATEGORY TABBED EXPLORER) -->
+        <!-- ========================================================================= -->
+        <section class="border-t border-zinc-200 dark:border-zinc-800 pt-10 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="font-serif text-2xl md:text-3xl font-bold tracking-tight text-zinc-950 dark:text-white">Explore By Desk</h2>
+                    <p class="text-xs text-zinc-500">Select a category desk to view recent dispatches and deep dives</p>
+                </div>
+
+                <!-- Category Tabs -->
+                <div class="flex flex-wrap gap-2 text-xs font-semibold">
+                    <button onclick="switchTab('tech')" id="tab-tech" class="desk-tab active-tab bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 px-4 py-2 rounded-full transition font-bold">Technology</button>
+                    <button onclick="switchTab('finance')" id="tab-finance" class="desk-tab bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 px-4 py-2 rounded-full hover:bg-zinc-200 transition">Finance</button>
+                    <button onclick="switchTab('science')" id="tab-science" class="desk-tab bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 px-4 py-2 rounded-full hover:bg-zinc-200 transition">Science</button>
+                    <button onclick="switchTab('arts')" id="tab-arts" class="desk-tab bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 px-4 py-2 rounded-full hover:bg-zinc-200 transition">Arts</button>
+                </div>
+            </div>
+
+            <!-- TAB CONTENT CONTAINER (JS WILL INJECT CARDS HERE) -->
+            <div id="desk-content-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Javascript will inject 4 stories based on tab selection -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-zinc-950 text-zinc-400 border-t border-zinc-800 mt-16 text-xs">
+        <div class="max-w-7xl mx-auto px-4 py-12">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
+                <div class="col-span-2">
+                    <h3 class="font-serif text-2xl font-bold text-white uppercase tracking-tight">The Global Chronicle</h3>
+                    <p class="mt-3 text-zinc-400 leading-relaxed max-w-sm">
+                        Delivering unbiased, rigorous journalism across international relations, technological shifts, and economic developments since 1898.
+                    </p>
+                    <div class="flex gap-4 mt-6 text-zinc-300">
+                        <a href="#" class="hover:text-white text-base"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="hover:text-white text-base"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="#" class="hover:text-white text-base"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="hover:text-white text-base"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white uppercase tracking-wider mb-3 text-[11px]">News Desks</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:underline">World Affairs</a></li>
+                        <li><a href="#" class="hover:underline">US Politics</a></li>
+                        <li><a href="#" class="hover:underline">Global Economy</a></li>
+                        <li><a href="#" class="hover:underline">Silicon Valley</a></li>
+                        <li><a href="#" class="hover:underline">Climate Science</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white uppercase tracking-wider mb-3 text-[11px]">Opinion & Arts</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:underline">Editorial Board</a></li>
+                        <li><a href="#" class="hover:underline">Columnists</a></li>
+                        <li><a href="#" class="hover:underline">Cultural Reviews</a></li>
+                        <li><a href="#" class="hover:underline">Books & Ideas</a></li>
+                        <li><a href="#" class="hover:underline">Letters to Editor</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white uppercase tracking-wider mb-3 text-[11px]">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:underline">About Us</a></li>
+                        <li><a href="#" class="hover:underline">Careers / Jobs</a></li>
+                        <li><a href="#" class="hover:underline">Ethics Charter</a></li>
+                        <li><a href="#" class="hover:underline">Advertise</a></li>
+                        <li><a href="#" class="hover:underline">Contact Press</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-zinc-900 flex flex-col sm:flex-row justify-between items-center gap-4 text-zinc-500">
+                <p>&copy; 2026 The Global Chronicle Publishing Co. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:underline">Privacy Policy</a>
+                    <a href="#" class="hover:underline">Terms of Service</a>
+                    <a href="#" class="hover:underline">Cookie Settings</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ARTICLE READING MODAL (Interactive Reader) -->
+    <div id="article-modal" class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-sm flex justify-center items-end sm:items-center p-0 sm:p-4 transition-opacity">
+        <div class="bg-white dark:bg-zinc-900 w-full max-w-3xl max-h-[90vh] rounded-t-2xl sm:rounded-2xl overflow-y-auto shadow-2xl border border-zinc-200 dark:border-zinc-800 flex flex-col">
+            <!-- Modal Header -->
+            <div class="sticky top-0 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 p-4 flex justify-between items-center z-10">
+                <span id="modal-category" class="text-xs font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">Article Reader</span>
+                <button onclick="closeArticleModal()" class="w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-500 flex items-center justify-center hover:bg-zinc-200 dark:hover:bg-zinc-700">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="p-6 sm:p-8 space-y-6">
+                <h2 id="modal-title" class="font-serif text-2xl sm:text-4xl font-bold leading-tight text-zinc-900 dark:text-white">
+                    Article Title Loading...
+                </h2>
+
+                <div class="flex items-center gap-4 text-xs text-zinc-500 border-b border-zinc-100 dark:border-zinc-800 pb-4">
+                    <span id="modal-author" class="font-semibold text-zinc-700 dark:text-zinc-300">Chronicle Staff Reporter</span>
+                    <span>&bull;</span>
+                    <span id="modal-time">Published Today</span>
+                </div>
+
+                <div class="aspect-video rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-800">
+                    <img id="modal-image" src="" alt="Article feature image" class="w-full h-full object-cover">
+                </div>
+
+                <div id="modal-body" class="prose dark:prose-invert max-w-none text-zinc-700 dark:text-zinc-300 text-base leading-relaxed space-y-4">
+                    <p>Loading article content...</p>
+                </div>
+            </div>
+            
+            <div class="p-4 bg-zinc-50 dark:bg-zinc-950 border-t border-zinc-200 dark:border-zinc-800 text-center">
+                <button onclick="closeArticleModal()" class="px-6 py-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-xs font-bold rounded-lg uppercase tracking-wider">
+                    Close Reader
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEARCH OVERLAY MODAL -->
+    <div id="search-modal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm p-4 flex justify-center items-start pt-20">
+        <div class="bg-white dark:bg-zinc-900 w-full max-w-2xl rounded-2xl shadow-2xl p-6 border border-zinc-200 dark:border-zinc-800">
+            <div class="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-4">
+                <div class="flex items-center gap-3 w-full">
+                    <i class="fa-solid fa-magnifying-glass text-zinc-400 text-lg"></i>
+                    <input type="text" id="search-input" onkeyup="handleSearch(this.value)" placeholder="Search news, topics, authors..." class="w-full bg-transparent text-lg outline-none text-zinc-900 dark:text-white">
+                </div>
+                <button onclick="toggleSearchModal()" class="text-zinc-400 hover:text-zinc-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <div id="search-results" class="mt-4 max-h-60 overflow-y-auto divide-y divide-zinc-100 dark:divide-zinc-800 text-sm">
+                <p class="text-zinc-500 text-xs p-2">Type keywords like "AI", "Climate", "Geneva" to search articles...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOOKMARKS DRAWER MODAL -->
+    <div id="bookmarks-drawer" class="fixed inset-y-0 right-0 z-50 w-80 bg-white dark:bg-zinc-900 border-l border-zinc-200 dark:border-zinc-800 shadow-2xl transform translate-x-full transition-transform duration-300 p-6 flex flex-col">
+        <div class="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-4">
+            <h3 class="font-serif font-bold text-lg flex items-center gap-2"><i class="fa-solid fa-bookmark text-brand-500"></i> Saved Reading List</h3>
+            <button onclick="toggleBookmarksDrawer()" class="text-zinc-400 hover:text-zinc-600"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="saved-articles-list" class="flex-1 overflow-y-auto py-4 space-y-3">
+            <p class="text-xs text-zinc-500 italic">No saved articles yet. Click the bookmark icon on any article to save for later.</p>
+        </div>
+    </div>
+
+    <!-- NAVIGATION DRAWER BACKDROP & MENU -->
+    <div id="menu-backdrop" onclick="toggleMobileMenu()" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden transition-opacity duration-300"></div>
+
+    <aside id="mobile-menu" class="fixed top-0 left-0 bottom-0 z-50 w-80 sm:w-96 bg-white dark:bg-zinc-900 border-r border-zinc-200 dark:border-zinc-800 shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out flex flex-col overflow-y-auto">
+        <div class="p-6 border-b border-zinc-200 dark:border-zinc-800 flex justify-between items-center bg-zinc-50 dark:bg-zinc-950">
+            <div>
+                <h3 class="font-serif text-xl font-bold uppercase text-zinc-950 dark:text-white tracking-tight">The Global Chronicle</h3>
+                <p class="text-[10px] text-zinc-500 uppercase tracking-widest font-sans mt-0.5">Navigation Hub</p>
+            </div>
+            <button onclick="toggleMobileMenu()" class="w-9 h-9 rounded-full bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 flex items-center justify-center hover:bg-zinc-300 dark:hover:bg-zinc-700 transition" aria-label="Close Menu">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+
+        <div class="p-6 space-y-6 flex-1">
+            <div>
+                <h4 class="text-[11px] font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400 mb-3">Primary Desks</h4>
+                <ul class="space-y-2 text-sm font-semibold">
+                    <li><a href="#" class="block py-2 px-3 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800">World Affairs</a></li>
+                    <li><a href="#" class="block py-2 px-3 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800">Technology</a></li>
+                    <li><a href="#" class="block py-2 px-3 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800">Business & Finance</a></li>
+                    <li><a href="#" class="block py-2 px-3 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800">Climate & Science</a></li>
+                    <li><a href="#" class="block py-2 px-3 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800">Arts & Culture</a></li>
+                </ul>
+            </div>
+        </div>
+    </aside>
+
+    <!-- TOAST NOTIFICATION BOX -->
+    <div id="toast-notification" class="fixed bottom-5 right-5 z-50 bg-zinc-900 text-white text-xs font-semibold px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <i class="fa-solid fa-check-circle text-emerald-400 text-sm" id="toast-icon"></i>
+        <span id="toast-message">Action completed successfully.</span>
+    </div>
+
+    <script>
+        /* DATABASE FOR SUGGESTED POSTS */
+        const articlesDB = {
+            'grid-post-1': {
+                title: "The Subsea Fiber Cables Powering the Global Economy Are Vulnerable",
+                category: "Investigation",
+                author: "Marcus Chen",
+                time: "Today",
+                image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=800&auto=format&fit=crop",
+                body: "<p>Deep below the surface of the world's oceans lies a network of glass threads carrying billions of financial transactions and global communications every second. Our three-month investigation reveals physical security vulnerabilities in deep-water repair infrastructure.</p>"
+            },
+            'grid-post-2': {
+                title: "Chronicle Daily Podcast: Restoring Biodiversity in Megacities",
+                category: "Audio Dispatch",
+                author: "Audio Desk",
+                time: "Episode 412",
+                image: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=800&auto=format&fit=crop",
+                body: "<p>Listen to urban ecologists discuss how living architecture corridors, micro-forest installations, and nocturnal lighting bans are reviving native wildlife species in high-density metropolitan areas.</p>"
+            },
+            'grid-post-3': {
+                title: "Human Cognitive Resilience in the Decade of Automated Feeds",
+                category: "Essay & Opinion",
+                author: "Dr. Aris Vance",
+                time: "Sunday Edition",
+                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop",
+                body: "<p>As synthetic content floods our information ecosystem, the human capacity for focused attention and nuanced evaluation becomes our most essential strategic asset.</p>"
+            }
+        };
+
+        const deskTabContent = {
+            tech: [
+                { id: 't1', tag: 'AI & Robotics', title: 'Next-Gen Neural Engines Achieve 10x Energy Efficiency', time: '1h ago', img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=300' },
+                { id: 't2', tag: 'Cybersecurity', title: 'Zero-Trust Architecture Adopted Across Banking Systems', time: '3h ago', img: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=300' },
+                { id: 't3', tag: 'Consumer Tech', title: 'Foldable Holographic Displays Enter Mass Production', time: '5h ago', img: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=300' },
+                { id: 't4', tag: 'Cloud Computing', title: 'Decentralized Data Mesh Standard Finalized', time: '7h ago', img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=300' }
+            ],
+            finance: [
+                { id: 'f1', tag: 'Currencies', title: 'Central Bank Digital Currency Pilot Reaches 50M Users', time: '30m ago', img: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=300' },
+                { id: 'f2', tag: 'Venture', title: 'Clean-Tech Seed Funding Reaches Historic Quarter High', time: '2h ago', img: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=300' },
+                { id: 'f3', tag: 'Commodities', title: 'Rare Earth Minerals Index Stabilizes Following Trade Deal', time: '4h ago', img: 'https://images.unsplash.com/photo-1618042164219-62c820f10723?q=80&w=300' },
+                { id: 'f4', tag: 'Real Estate', title: 'Urban Office Conversions Transform Commercial Centers', time: '6h ago', img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=300' }
+            ],
+            science: [
+                { id: 's1', tag: 'Genomics', title: 'Gene-Editing Therapy Receives Approval for Rare Disease', time: '2h ago', img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=300' },
+                { id: 's2', tag: 'Fusion', title: 'Magnetic Confinement Reactor Maintains Net Energy Gain', time: '4h ago', img: 'https://images.unsplash.com/photo-1507668077129-56e32842fceb?q=80&w=300' },
+                { id: 's3', tag: 'Oceanography', title: 'Deep Ocean Trench Mapping Uncovers 200 New Marine Species', time: '6h ago', img: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=300' },
+                { id: 's4', tag: 'Quantum', title: 'Room-Temperature Superconductor Claims Undergo Peer Review', time: '8h ago', img: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=300' }
+            ],
+            arts: [
+                { id: 'a1', tag: 'Architecture', title: 'Timber Skyscrapers Redefine Sustainable Urban Density', time: '1h ago', img: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=300' },
+                { id: 'a2', tag: 'Cinema', title: 'International Film Festival Awards Grand Prix to Indie Drama', time: '3h ago', img: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=300' },
+                { id: 'a3', tag: 'Literature', title: 'Post-Humous Novel by Renowned Author Tops Global Best-Sellers', time: '5h ago', img: 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=300' },
+                { id: 'a4', tag: 'Design', title: 'Minimalist Industrial Aesthetics Return to Workspaces', time: '8h ago', img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=300' }
+            ]
+        };
+
+        let currentFontLevel = 0; // -1, 0, +1
+        let isMainSaved = false;
+        let isAudioPlaying = false;
+        let audioTimer = null;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            switchTab('tech');
+
+            // Keyboard shortcut for search
+            document.addEventListener('keydown', (e) => {
+                if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                    e.preventDefault();
+                    toggleSearchModal();
+                }
+                if (e.key === 'Escape') {
+                    closeArticleModal();
+                    toggleSearchModal(true);
+                    toggleMobileMenu(true);
+                    toggleBookmarksDrawer(true);
+                }
+            });
+        });
+
+        /* FONT SIZE RESIZER LOGIC */
+        function changeFontSize(direction) {
+            const body = document.getElementById('article-text-body');
+            if (direction === 0) {
+                currentFontLevel = 0;
+                body.className = "prose dark:prose-invert max-w-none space-y-6 text-zinc-800 dark:text-zinc-200 text-base sm:text-lg leading-relaxed font-sans";
+            } else if (direction === 1 && currentFontLevel < 2) {
+                currentFontLevel++;
+                body.className = "prose dark:prose-invert max-w-none space-y-6 text-zinc-800 dark:text-zinc-200 text-lg sm:text-xl leading-relaxed font-sans";
+            } else if (direction === -1 && currentFontLevel > -2) {
+                currentFontLevel--;
+                body.className = "prose dark:prose-invert max-w-none space-y-6 text-zinc-800 dark:text-zinc-200 text-sm sm:text-base leading-relaxed font-sans";
+            }
+            showToast(`Article text size adjusted`);
+        }
+
+        /* BOOKMARK TOGGLE */
+        function toggleBookmarkCurrentArticle() {
+            isMainSaved = !isMainSaved;
+            const icon = document.getElementById('main-bookmark-icon');
+            const text = document.getElementById('main-bookmark-text');
+            const badge = document.getElementById('bookmark-badge');
+
+            if (isMainSaved) {
+                icon.className = "fa-solid fa-bookmark text-brand-500";
+                text.textContent = "Saved";
+                badge.classList.remove('hidden');
+                showToast("Article saved to reading list");
+            } else {
+                icon.className = "fa-regular fa-bookmark";
+                text.textContent = "Save";
+                badge.classList.add('hidden');
+                showToast("Article removed from reading list");
+            }
+        }
+
+        /* AUDIO NARRATION SIMULATOR */
+        function toggleAudioNarration(btn) {
+            const icon = btn.querySelector('i');
+            const progressBar = document.getElementById('audio-progress');
+
+            if (!isAudioPlaying) {
+                isAudioPlaying = true;
+                icon.className = "fa-solid fa-pause";
+                showToast("Playing article audio edition...");
+
+                let progress = 0;
+                audioTimer = setInterval(() => {
+                    progress += 2;
+                    progressBar.style.width = progress + '%';
+                    if (progress >= 100) {
+                        clearInterval(audioTimer);
+                        isAudioPlaying = false;
+                        icon.className = "fa-solid fa-play ml-0.5";
+                        progressBar.style.width = '0%';
+                        showToast("Finished audio playback");
+                    }
+                }, 400);
+            } else {
+                isAudioPlaying = false;
+                clearInterval(audioTimer);
+                icon.className = "fa-solid fa-play ml-0.5";
+                showToast("Audio paused");
+            }
+        }
+
+        /* SECTION 3: DESK TAB SWITCHER */
+        function switchTab(deskKey) {
+            const tabs = document.querySelectorAll('.desk-tab');
+            tabs.forEach(tab => {
+                tab.className = 'desk-tab bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 px-4 py-2 rounded-full hover:bg-zinc-200 transition';
+            });
+
+            const activeBtn = document.getElementById(`tab-${deskKey}`);
+            if (activeBtn) {
+                activeBtn.className = 'desk-tab active-tab bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 px-4 py-2 rounded-full transition font-bold';
+            }
+
+            const grid = document.getElementById('desk-content-grid');
+            const items = deskTabContent[deskKey] || [];
+
+            grid.innerHTML = items.map(item => `
+                <article class="article-card bg-white dark:bg-zinc-900 rounded-xl p-4 border border-zinc-200 dark:border-zinc-800 shadow-xs cursor-pointer flex flex-col justify-between" onclick="openArticleModal('grid-post-1')">
+                    <div>
+                        <div class="aspect-video rounded-lg overflow-hidden mb-3 bg-zinc-100 dark:bg-zinc-800">
+                            <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover">
+                        </div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">${item.tag}</span>
+                        <h4 class="font-serif font-bold text-sm text-zinc-900 dark:text-zinc-100 line-clamp-2 mt-1 hover:text-brand-600 transition-colors">
+                            ${item.title}
+                        </h4>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-zinc-100 dark:border-zinc-800 flex justify-between items-center text-[11px] text-zinc-500">
+                        <span>${item.time}</span>
+                        <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        /* ARTICLE MODAL */
+        function openArticleModal(id) {
+            const article = articlesDB[id] || {
+                title: "Dispatch News Report",
+                category: "General",
+                author: "Chronicle Journalist",
+                time: "Recently Updated",
+                image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=800",
+                body: "<p>Full reporting for this news dispatch is currently being transmitted by our international desk team.</p>"
+            };
+
+            document.getElementById('modal-title').textContent = article.title;
+            document.getElementById('modal-category').textContent = article.category;
+            document.getElementById('modal-author').textContent = article.author;
+            document.getElementById('modal-time').textContent = article.time;
+            document.getElementById('modal-image').src = article.image;
+            document.getElementById('modal-body').innerHTML = article.body;
+
+            const modal = document.getElementById('article-modal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeArticleModal() {
+            const modal = document.getElementById('article-modal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        /* UTILITY TOGGLES */
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            const icon = document.getElementById('theme-toggle-icon');
+            if (document.documentElement.classList.contains('dark')) {
+                icon.className = 'fa-solid fa-sun text-amber-400';
+            } else {
+                icon.className = 'fa-solid fa-moon text-sm';
+            }
+        }
+
+        function toggleMobileMenu(forceClose = false) {
+            const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('menu-backdrop');
+            if (forceClose || !menu.classList.contains('-translate-x-full')) {
+                menu.classList.add('-translate-x-full');
+                backdrop.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            } else {
+                menu.classList.remove('-translate-x-full');
+                backdrop.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function toggleSearchModal(forceClose = false) {
+            const modal = document.getElementById('search-modal');
+            if (forceClose) {
+                modal.classList.add('hidden');
+            } else {
+                modal.classList.toggle('hidden');
+                if (!modal.classList.contains('hidden')) {
+                    document.getElementById('search-input').focus();
+                }
+            }
+        }
+
+        function toggleBookmarksDrawer(forceClose = false) {
+            const drawer = document.getElementById('bookmarks-drawer');
+            if (forceClose) {
+                drawer.classList.add('translate-x-full');
+            } else {
+                drawer.classList.toggle('translate-x-full');
+            }
+        }
+
+        function toggleAudioSample(btn) {
+            const icon = btn.querySelector('i');
+            if (icon.classList.contains('fa-play')) {
+                icon.className = 'fa-solid fa-pause ml-0 text-lg';
+                btn.classList.add('bg-brand-500', 'text-white');
+                showToast("Playing podcast episode snippet...");
+            } else {
+                icon.className = 'fa-solid fa-play ml-1 text-lg';
+                btn.classList.remove('bg-brand-500', 'text-white');
+            }
+        }
+
+        function handleCommentSubmit(e) {
+            e.preventDefault();
+            showToast("Comment submitted for editorial approval!");
+            e.target.reset();
+        }
+
+        function handleSubscribe(e) {
+            e.preventDefault();
+            showToast("Subscribed to Chronicle Daily Briefing!");
+            e.target.reset();
+        }
+
+        function shareLink(platform) {
+            showToast(`Shared to ${platform.toUpperCase()}`);
+        }
+
+        function copyArticleLink() {
+            showToast("Article link copied to clipboard!");
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast-notification');
+            document.getElementById('toast-message').textContent = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

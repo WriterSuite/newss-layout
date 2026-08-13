@@ -1,0 +1,175 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import { getPostBySlug, getPosts, getAdsConfig } from '../../lib/api';
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+const post = await getPostBySlug(slug || 'historic-summit-yields-accord-on-ai-safeguards');
+const { items: recentPosts } = await getPosts(1, 6);
+const adsConfig = await getAdsConfig();
+
+if (!post) {
+  return Astro.redirect('/404');
+}
+
+const catName = post.category?.name || post.category?.category_name || 'News';
+const catSlug = post.category?.slug || 'world';
+const relatedPosts = recentPosts.filter(p => p.slug !== post.slug).slice(0, 3);
+---
+
+<BaseLayout 
+  title={post.meta_tag?.title || `${post.title} - The Global Chronicle`}
+  description={post.meta_tag?.description || post.meta_description || post.subheading || post.title}
+  currentCategorySlug={catSlug}
+  subTitle={`${catName} Desk • Est. 1898`}
+  schemaMarkup={post.schema_markup}
+>
+  <!-- BREADCRUMBS & ARTICLE ACTION BAR -->
+  <div class="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-4">
+      <nav class="flex items-center gap-2 text-xs font-semibold text-zinc-500 dark:text-zinc-400">
+          <a href="/" class="hover:underline">Home</a>
+          <i class="fa-solid fa-chevron-right text-[10px]"></i>
+          <a href={`/category/${catSlug}`} class="hover:underline">{catName}</a>
+          <i class="fa-solid fa-chevron-right text-[10px]"></i>
+          <span class="text-brand-600 dark:text-brand-400 font-bold uppercase tracking-wider">Article</span>
+      </nav>
+
+      <!-- Action Buttons & Bookmark -->
+      <div class="flex items-center gap-4 text-xs font-semibold">
+          <button onclick="toggleBookmarkCurrentArticle()" id="main-article-bookmark-btn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition">
+              <i id="main-bookmark-icon" class="fa-regular fa-bookmark"></i>
+              <span id="main-bookmark-text">Save Article</span>
+          </button>
+      </div>
+  </div>
+
+  <!-- ARTICLE HEADER BANNER -->
+  <header class="space-y-4 max-w-4xl">
+      <div class="flex items-center gap-3">
+          <span class="bg-editorial-red text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded">
+              {catName}
+          </span>
+          <span class="text-xs text-zinc-500 font-mono"><i class="fa-regular fa-clock mr-1"></i> {post.readTime || '6 Min Read'}</span>
+          <span class="text-xs text-emerald-600 dark:text-emerald-400 font-semibold"><i class="fa-solid fa-check-circle mr-1"></i> Verified Reporting</span>
+      </div>
+
+      <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-extrabold text-zinc-950 dark:text-white leading-[1.15] tracking-tight">
+          {post.title}
+      </h1>
+
+      {post.subheading && (
+        <p class="text-lg sm:text-xl text-zinc-600 dark:text-zinc-300 font-serif italic leading-relaxed">
+            {post.subheading}
+        </p>
+      )}
+
+      <!-- Author Byline & Social Sharing Row -->
+      <div class="pt-4 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+              {post.author?.avatar_url && (
+                <img src={post.author.avatar_url} alt={post.author.name} class="w-12 h-12 rounded-full object-cover ring-2 ring-brand-500" />
+              )}
+              <div>
+                  <div class="flex items-center gap-2">
+                      <h3 class="font-bold text-sm text-zinc-900 dark:text-zinc-100">{post.author?.name || 'Staff Reporter'}</h3>
+                      <span class="text-[10px] bg-brand-100 dark:bg-brand-950 text-brand-600 dark:text-brand-400 px-2 py-0.5 rounded font-semibold uppercase">{post.author?.tagline || 'Journalist'}</span>
+                  </div>
+                  <p class="text-xs text-zinc-500">
+                    Published {post.publish_date ? new Date(post.publish_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recently'}
+                  </p>
+              </div>
+          </div>
+
+          <!-- Social Sharing Buttons -->
+          <div class="flex items-center gap-2 text-zinc-500 dark:text-zinc-400">
+              <span class="text-xs font-bold uppercase tracking-wider mr-1 text-zinc-400">Share:</span>
+              <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}`} target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center hover:bg-brand-500 hover:text-white transition" title="Share on Twitter">
+                  <i class="fa-brands fa-x-twitter text-sm"></i>
+              </a>
+              <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(post.meta_tag?.canonical || '')}`} target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition" title="Share on LinkedIn">
+                  <i class="fa-brands fa-linkedin-in text-sm"></i>
+              </a>
+              <button onclick="navigator.clipboard.writeText(window.location.href); alert('Link copied to clipboard!');" class="w-9 h-9 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition" title="Copy Link">
+                  <i class="fa-solid fa-link text-sm"></i>
+              </button>
+          </div>
+      </div>
+  </header>
+
+  <!-- TWO-COLUMN MAIN ARTICLE GRID -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+      <!-- LEFT COLUMN: ARTICLE CONTENT (8 COLS) -->
+      <article class="lg:col-span-8 space-y-8" id="article-body-container">
+          {post.thumbnail_url && (
+            <figure class="space-y-2">
+                <div class="aspect-[16/9] rounded-2xl overflow-hidden bg-zinc-900 relative shadow-lg">
+                    <img src={post.thumbnail_url} alt={post.title} class="w-full h-full object-cover" />
+                    <div class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-mono px-3 py-1 rounded">
+                        <i class="fa-solid fa-camera mr-1"></i> Photo: Chronicle Press Wire
+                    </div>
+                </div>
+            </figure>
+          )}
+
+          <!-- ARTICLE CONTENT -->
+          <div class="prose dark:prose-invert max-w-none space-y-6 text-zinc-800 dark:text-zinc-200 text-base sm:text-lg leading-relaxed font-sans" set:html={post.content} />
+
+          <!-- IN-ARTICLE AD PLACEMENT -->
+          {(adsConfig?.in_article || adsConfig?.article_ad_code) && (
+            <div class="my-8 w-full text-center">
+              <Fragment set:html={adsConfig.in_article || adsConfig.article_ad_code} />
+            </div>
+          )}
+
+          {post.author && (
+            <div class="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 flex flex-col sm:flex-row items-center sm:items-start gap-4">
+                {post.author.avatar_url && (
+                  <img src={post.author.avatar_url} alt={post.author.name} class="w-16 h-16 rounded-full object-cover shrink-0 border-2 border-brand-500" />
+                )}
+                <div class="text-center sm:text-left space-y-1">
+                    <h4 class="font-serif font-bold text-base text-zinc-900 dark:text-zinc-100">About {post.author.name}</h4>
+                    <p class="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                        {post.author.bio || post.author.tagline || 'Journalist covering international news and policy.'}
+                    </p>
+                </div>
+            </div>
+          )}
+      </article>
+
+      <!-- RIGHT COLUMN: SIDEBAR (4 COLS) -->
+      <aside class="lg:col-span-4 space-y-8 sticky top-28">
+          <!-- SIDEBAR AD PLACEMENT -->
+          {(adsConfig?.sidebar || adsConfig?.sidebar_ad_code) && (
+            <div class="w-full text-center">
+              <Fragment set:html={adsConfig.sidebar || adsConfig.sidebar_ad_code} />
+            </div>
+          )}
+
+          <div class="bg-white dark:bg-zinc-900 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm space-y-4">
+              <h3 class="font-serif font-bold text-lg text-zinc-900 dark:text-zinc-100 flex items-center gap-2 border-b border-zinc-100 dark:border-zinc-800 pb-3">
+                  <i class="fa-solid fa-fire text-editorial-red"></i> More In {catName}
+              </h3>
+              <div class="space-y-4 divide-y divide-zinc-100 dark:divide-zinc-800">
+                  {relatedPosts.map((rPost, idx) => (
+                      <ArticleCard article={rPost} variant="side-list" indexNumber={idx + 1} />
+                  ))}
+              </div>
+          </div>
+      </aside>
+  </div>
+
+  <!-- RELATED ARTICLES GRID -->
+  <section class="border-t border-zinc-200 dark:border-zinc-800 pt-10">
+      <h2 class="font-serif text-2xl font-bold tracking-tight mb-6">Related Stories</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {relatedPosts.map((rPost) => (
+              <ArticleCard article={rPost} variant="standard" />
+          ))}
+      </div>
+  </section>
+
+  <Newsletter />
+</BaseLayout>

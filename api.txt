@@ -1,0 +1,2 @@
+api_url=https://suddomain.writersuite.app/api/v1
+api_key=ws_live_s75cc09ce61767b9eb11187df78c6
